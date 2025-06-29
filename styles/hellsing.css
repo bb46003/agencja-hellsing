@@ -1,0 +1,144 @@
+/* --- Sidebar and Actor Image --- */
+.sidebar {
+  height: 100%;
+  width: 250px;
+  border: solid 1px #ccc;
+  overflow-y: auto;
+}
+
+.actor-image {
+  height: 100px;
+  margin: auto;
+}
+
+.actor-info,
+.cechy {
+  margin: 0 10px;
+}
+
+.actor-name input[type="text"] {
+  text-align: center;
+}
+
+/* --- Cecha (Trait) Container --- */
+.cecha {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cecha > .cecha-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 10px;
+}
+
+.cecha-name,
+.selector-cech {
+  font-size: 1.1rem;
+}
+
+.selector-cech {
+  width: auto;
+}
+
+/* --- Umiejętności (Skills) --- */
+.umiejetnosci {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.lista-umiejetnosci {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 10px;
+}
+
+/* Each skill row */
+.lista-umiejetnosci > .glowna,
+.lista-umiejetnosci > .specjalna {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid #000; /* unified border for .glowna */
+}
+
+/* Text inputs inside skills */
+.specjalna input[type="text"],
+.glowna input[type="text"],
+.lista-umiejetnosci input[type="text"] {
+  flex: 1;
+  max-width: 250px;
+}
+
+/* Checkbox group layout */
+.checkbox-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+/* --- Round checkbox styling --- */
+.glowna-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: scale(1.1);
+  position: relative;
+  margin-right: 5px;
+  background-color: white;
+}
+
+/* Checked state with inner dot */
+.glowna-checkbox:checked {
+  background-color: #007BFF;
+  border-color: #007BFF;
+}
+
+.glowna-checkbox:checked::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* Alternative round checkbox selector (if needed) */
+.round-checkbox input[type="checkbox"] {
+  appearance: none;
+  border: 2px solid #555;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.round-checkbox input[type="checkbox"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: #000;
+  border-radius: 50%;
+}

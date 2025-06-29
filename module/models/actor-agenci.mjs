@@ -11,10 +11,39 @@ export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
+
     const schema = {};
-    //cechy postaci
+
+    // Build cechy schema with per-cecha skill fields
     schema.cechy = new fields.SchemaField(
       Object.values(SYSTEM.CEHY).reduce((obj, cecha) => {
+        // Build fresh skill fields for this cecha
+        const skillFields = Object.entries(SYSTEM.UMIEJETNOSCI).reduce(
+          (acc, [key, skill]) => {
+            const isGlowna = key === "glowna";
+            acc[key] = new fields.SchemaField(
+              {
+                label: new fields.StringField({
+                  initial: "",
+                  maxLength: 50,
+                  validator: (value) =>
+                    /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s]*$/.test(value),
+                }),
+                value: new fields.NumberField({
+                  ...requiredInteger,
+                  initial: 0,
+                  min: 0,
+                  max: isGlowna ? 3 : 4,
+                }),
+              },
+              { label: skill.label },
+            );
+            return acc;
+          },
+          {},
+        );
+
+        // Add value and skills to this cecha
         obj[cecha.id] = new fields.SchemaField(
           {
             value: new fields.NumberField({
@@ -23,12 +52,24 @@ export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
               min: 0,
               max: 3,
             }),
+            ...skillFields,
           },
           { label: cecha.label },
         );
+
         return obj;
       }, {}),
     );
+
     return schema;
+  }
+
+  /** @override */
+  prepareBaseData() {
+    super.prepareBaseData();
+  }
+  /** @inheritDoc */
+  static migrateData(source) {
+    super.migrateData(source);
   }
 }

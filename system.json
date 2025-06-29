@@ -18,23 +18,17 @@
   "styles": ["styles/hellsing.css"],
   "documentTypes": {
     "Actor": {
-      "agenci": {
-        "htmlFields": [
-          "details.biography.public",
-          "details.biography.private",
-          "details.biography.appearance"
-        ]
-      }
-    },
-    "grid": {
-      "type": 1,
-      "distance": 2,
-      "units": "m",
-      "diagonals": 1
-    },
+      "agenci": {}
+    }
+  },
+  "grid": {
+    "type": 1,
+    "distance": 2,
+    "units": "m",
+    "diagonals": 1
+  },
 
-    "socket": true,
-    "manifest": "",
-    "download": ""
-  }
+  "socket": true,
+  "manifest": "",
+  "download": ""
 }
