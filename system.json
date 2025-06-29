@@ -1,0 +1,40 @@
+{
+  "id": "agencja-hellsing",
+  "title": "Agencja Helsing",
+  "description": "Impelmntacja systemu Agencja Hellsing na Foundry VTT",
+  "version": "0.1",
+  "authors": [
+    {
+      "name": "BartekB"
+    }
+  ],
+  "compatibility": {
+    "minimum": 13,
+    "verified": 13,
+    "maximum": 13
+  },
+  "license": "LICENSE",
+  "esmodules": ["hellsing.mjs"],
+  "styles": ["styles/hellsing.css"],
+  "documentTypes": {
+    "Actor": {
+      "agenci": {
+        "htmlFields": [
+          "details.biography.public",
+          "details.biography.private",
+          "details.biography.appearance"
+        ]
+      }
+    },
+    "grid": {
+      "type": 1,
+      "distance": 2,
+      "units": "m",
+      "diagonals": 1
+    },
+
+    "socket": true,
+    "manifest": "",
+    "download": ""
+  }
+}
