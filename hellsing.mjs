@@ -17,9 +17,9 @@ Hooks.once("init", async function () {
   CONFIG.Actor.dataModels = {
     agenci: models.AgenciDataModel,
   };
-
-  const sheets = foundry.applications.apps.DocumentSheetConfig;
-  sheets.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
+  const defaultActorSheet = game.release.generation < 13 ? ActorSheet     : foundry.appv1.sheets.ActorSheet;
+  const sheets = game.release.generation < 13 ? DocumentSheetConfig : foundry.applications.apps.DocumentSheetConfig;
+  sheets.unregisterSheet(Actor, "core", defaultActorSheet);
   sheets.registerSheet(Actor, SYSTEM.id, applications.AgenciActorSheet, {
     types: ["agenci"],
     label: "Agent",
