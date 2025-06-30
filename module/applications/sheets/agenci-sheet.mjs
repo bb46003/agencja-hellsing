@@ -13,6 +13,9 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       width: 900,
       height: 760,
     },
+    actions:{
+      skillRoll: AgenciActorSheet.#onskillRoll
+    },
     form: {
       submitOnChange: true,
     },
@@ -35,6 +38,10 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       id: "body",
       template: "systems/agencja-hellsing/templates/sheets/actor/body.hbs",
     },
+    cechy_umiejetnosci:{
+      id:"cechy-umiejetnosci",
+      template:"systems/agencja-hellsing/templates/sheets/actor/cechy-umiejetnosci.hbs"
+    }
   };
 
   /** At least one tab is required to avoid rendering errors */
@@ -99,7 +106,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
 
     const context = {
       tabs: tabGroups.sheet ?? [],
-      actor: actorData,
+      actor: this.document,
       system: actorData.system,
       fields: this.document.system?.schema?.fields ?? {},
       isEditable: this.isEditable,
@@ -115,4 +122,9 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     await super.render(force, options);
     console.log("AgenciActorSheet rendered:", this);
   }
+  static async #onskillRoll(event){
+    const roll = await new Roll("2d6");
+    roll.toMessage();
+  }
+  
 }

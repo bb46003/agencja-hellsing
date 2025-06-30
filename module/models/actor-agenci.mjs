@@ -52,9 +52,33 @@ export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
               min: 0,
               max: 3,
             }),
+            przewagi: new fields.NumberField({
+              ...requiredInteger,
+              initial: 0,
+              min: 0,
+              max: 99,
+            }),
             ...skillFields,
           },
           { label: cecha.label },
+        );
+
+        return obj;
+      }, {}),
+    );
+
+    schema.obronne = new fields.SchemaField(
+      Object.values(SYSTEM.OBRONNE).reduce((obj, obronny) => {
+        obj[obronny.id] = new fields.SchemaField(
+          {
+            value: new fields.NumberField({
+              ...requiredInteger,
+              initial: 0,
+              min: 0,
+              max: 99,
+            }),
+          },
+          { label: obronny.label },
         );
 
         return obj;

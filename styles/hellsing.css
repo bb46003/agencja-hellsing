@@ -1,7 +1,7 @@
 /* --- Sidebar and Actor Image --- */
 .sidebar {
   height: 100%;
-  width: 250px;
+  width: 220px;
   border: solid 1px #ccc;
   overflow-y: auto;
 }
@@ -13,13 +13,33 @@
 
 .actor-info,
 .cechy {
-  margin: 0 10px;
+margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 305px;
+    gap: 5px;
+    justify-content: center;
 }
 
 .actor-name input[type="text"] {
   text-align: center;
 }
+.cecha-pojedyncza {
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.przewaga{
+  width: 100px;
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
 
+
+}
 /* --- Cecha (Trait) Container --- */
 .cecha {
   border: 1px solid #ccc;
@@ -104,8 +124,8 @@
 
 /* Checked state with inner dot */
 .glowna-checkbox:checked {
-  background-color: #007BFF;
-  border-color: #007BFF;
+  background-color: #007bff;
+  border-color: #007bff;
 }
 
 .glowna-checkbox:checked::before {
@@ -118,27 +138,30 @@
   background-color: white;
   border-radius: 50%;
 }
-
-/* Alternative round checkbox selector (if needed) */
-.round-checkbox input[type="checkbox"] {
-  appearance: none;
-  border: 2px solid #555;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  margin-right: 5px;
-  cursor: pointer;
-  background-color: white;
+.hellsing.sheet.actor .window-content {
+  display: flex;
+  flex-direction: row;
+}
+.obronne{
+    text-align: center;
+    margin: 20px;
+}
+.rzuty-obdronne {
+  display: flex;                 /* Arrange items in a row */
+  align-items: center;           /* Center vertically */
+  justify-content: center;       /* Center horizontally */
+  gap: 10px;                     /* Optional space between label and input */             /* Optional: ensure vertical centering works inside a container */
 }
 
-.round-checkbox input[type="checkbox"]:checked::before {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 10px;
-  height: 10px;
-  background-color: #000;
-  border-radius: 50%;
+.rzuty-obdronne input {
+    width: 50px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+.cecha-top input[type="number"] {
+    width: 40px;
+    text-align: center;
+}
+.heder-obronne{
+  text-align: center;
 }

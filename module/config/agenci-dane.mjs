@@ -35,7 +35,7 @@ export const UMIEJETNOSCI = Object.freeze({
   speclajna1: {
     id: "specjana1",
     label: "Slecjana",
-    sheetOrder: 1,
+    sheetOrder: 2,
     nodeId: "sp1",
   },
   speclajna2: {
@@ -47,7 +47,34 @@ export const UMIEJETNOSCI = Object.freeze({
   speclajna3: {
     id: "specjana3",
     label: "Slecjana",
-    sheetOrder: 3,
+    sheetOrder: 4,
     nodeId: "sp3",
+  },
+});
+
+export const OBRONNE = Object.freeze({
+  sila: {
+    id: "sila",
+    label: "Siła",
+    sheetOrder: 1,
+    nodeId: 1,
+  },
+  refleks: {
+    id: "refleks",
+    label: "Refleks",
+    sheetOrder: 2,
+    nodeId: 2,
+  },
+  wola: {
+    id: "wola",
+    label: "Wola",
+    sheetOrder: 3,
+    nodeId: 3,
+  },
+  intuicja: {
+    id: "intuicja",
+    label: "Intuicja",
+    sheetOrder: 4,
+    nodeId: 4,
   },
 });
