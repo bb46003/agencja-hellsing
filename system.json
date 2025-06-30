@@ -2,7 +2,7 @@
   "id": "agencja-hellsing",
   "title": "Agencja Helsing",
   "description": "Impelmntacja systemu Agencja Hellsing na Foundry VTT",
-  "version": "0.1",
+   "version": "vDev",
   "authors": [
     {
       "name": "BartekB"
@@ -29,6 +29,7 @@
   },
 
   "socket": true,
-  "manifest": "",
-  "download": ""
+  "url": "Filled in by the release workflow",
+  "manifest": "Filled in by the release workflow",
+  "download": "Filled in by the release workflow"
 }
