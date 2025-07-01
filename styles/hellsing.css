@@ -13,32 +13,30 @@
 
 .actor-info,
 .cechy {
-margin: 0 10px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 305px;
-    gap: 5px;
-    justify-content: center;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 305px;
+  gap: 5px;
+  justify-content: center;
 }
 
 .actor-name input[type="text"] {
   text-align: center;
 }
 .cecha-pojedyncza {
-    width: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.przewaga{
+.przewaga {
   width: 100px;
   display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 5px;
-
-
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
 }
 /* --- Cecha (Trait) Container --- */
 .cecha {
@@ -142,26 +140,26 @@ margin: 0 10px;
   display: flex;
   flex-direction: row;
 }
-.obronne{
-    text-align: center;
-    margin: 20px;
+.obronne {
+  text-align: center;
+  margin: 20px;
 }
 .rzuty-obdronne {
-  display: flex;                 /* Arrange items in a row */
-  align-items: center;           /* Center vertically */
-  justify-content: center;       /* Center horizontally */
-  gap: 10px;                     /* Optional space between label and input */             /* Optional: ensure vertical centering works inside a container */
+  display: flex; /* Arrange items in a row */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  gap: 10px; /* Optional space between label and input */ /* Optional: ensure vertical centering works inside a container */
 }
 
 .rzuty-obdronne input {
-    width: 50px;
-    margin-left: auto;
-    margin-right: 20px;
+  width: 50px;
+  margin-left: auto;
+  margin-right: 20px;
 }
 .cecha-top input[type="number"] {
-    width: 40px;
-    text-align: center;
+  width: 40px;
+  text-align: center;
 }
-.heder-obronne{
+.heder-obronne {
   text-align: center;
 }

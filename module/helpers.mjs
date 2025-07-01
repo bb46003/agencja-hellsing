@@ -24,4 +24,16 @@ export function registerHandlebarsHelpers() {
   Handlebars.registerHelper("log", function (element) {
     console.log(element);
   });
+  Handlebars.registerHelper("notEmpty", function (arr) {
+    return (Array.isArray(arr) || typeof arr === "string") && arr.length > 0;
+  });
+
+  Handlebars.registerHelper("isArray", function (value) {
+    return Array.isArray(value);
+  });
+
+  Handlebars.registerHelper("join", function (arr, separator) {
+    if (!Array.isArray(arr)) return "";
+    return arr.join(separator);
+  });
 }

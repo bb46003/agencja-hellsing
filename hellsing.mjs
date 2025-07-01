@@ -10,9 +10,7 @@ Hooks.once("init", async function () {
   const hellsing = (globalThis.hellsing = game.system);
   hellsing.CONST = SYSTEM;
 
-  CONFIG.Actor.typeClasses = {
-    agenci: documents.AgenciActor, // ✅ przypisanie tylko dla tego typu
-  };
+  CONFIG.Actor.documentClass = documents.AgenciActor;
 
   CONFIG.Actor.dataModels = {
     agenci: models.AgenciDataModel,

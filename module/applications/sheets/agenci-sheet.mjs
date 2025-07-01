@@ -13,8 +13,8 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       width: 900,
       height: 760,
     },
-    actions:{
-      skillRoll: AgenciActorSheet.#onskillRoll
+    actions: {
+      skillRoll: AgenciActorSheet.#onskillRoll,
     },
     form: {
       submitOnChange: true,
@@ -38,10 +38,11 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       id: "body",
       template: "systems/agencja-hellsing/templates/sheets/actor/body.hbs",
     },
-    cechy_umiejetnosci:{
-      id:"cechy-umiejetnosci",
-      template:"systems/agencja-hellsing/templates/sheets/actor/cechy-umiejetnosci.hbs"
-    }
+    cechy_umiejetnosci: {
+      id: "cechy-umiejetnosci",
+      template:
+        "systems/agencja-hellsing/templates/sheets/actor/cechy-umiejetnosci.hbs",
+    },
   };
 
   /** At least one tab is required to avoid rendering errors */
@@ -122,9 +123,24 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     await super.render(force, options);
     console.log("AgenciActorSheet rendered:", this);
   }
-  static async #onskillRoll(event){
-    const roll = await new Roll("2d6");
-    roll.toMessage();
+  static async #onskillRoll(event) {
+    const target = event.target;
+    const sheet = event.currentTarget
+   const container = target.closest(".specjalna, .glowna");
+      if (!container) return;
+      const textInput = container.querySelector('input[type="text"]');
+      const skillName = textInput ? textInput.value : null;
+      const checkboxes = container.querySelectorAll("input.glowna-checkbox");
+      let skillValue = null;
+      checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+          skillValue = checkbox.getAttribute("data-val");
+        }
+      });
+      const actor = this.actor;
+      console.log("Actor class:", this.actor.constructor.name);
+
+      return this.actor.rollSkill(skillName, skillValue, actor);
+    
   }
-  
 }

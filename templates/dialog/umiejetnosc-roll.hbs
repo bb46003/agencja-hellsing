@@ -1,0 +1,44 @@
+<label>Rzucasz na Umiejętność
+  <strong>{{umiejtnosc}}</strong>
+  o wartości
+  <strong>{{wartoscUmiejetnosci}}</strong></label><br />
+
+{{#if (notEmpty aspekty)}}
+  <label>Aspekty:</label>
+  <ul>
+    {{#each aspekty}}
+      <li>
+        <strong>{{this.name}}</strong>:
+        {{#if (isArray this.tag)}}{{join
+            this.tag
+            ", "
+          }}{{else}}{{this.tag}}{{/if}}
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}
+
+{{#if (notEmpty sprzet)}}
+  <label>Sprzęt:</label>
+  <ul>
+    {{#each sprzet}}
+      <li>
+        <strong>{{this.name}}</strong>:
+        {{#if (isArray this.tag)}}{{join
+            this.tag
+            ", "
+          }}{{else}}{{this.tag}}{{/if}}
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}
+
+<label>
+  Ułatwienia:
+  <input type="number" name="ulatwienia" value="0" min="0" />
+</label><br />
+
+<label>
+  Utrudnienia:
+  <input type="number" name="utrudnienia" value="0" min="0" />
+</label>
