@@ -15,6 +15,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     },
     actions: {
       skillRoll: AgenciActorSheet.#onskillRoll,
+      setSkillValue: AgenciActorSheet.#setSkillValue
     },
     form: {
       submitOnChange: true,
@@ -121,26 +122,35 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
 
   async render(force = false, options = {}) {
     await super.render(force, options);
-    console.log("AgenciActorSheet rendered:", this);
+
   }
   static async #onskillRoll(event) {
     const target = event.target;
-    const sheet = event.currentTarget
-   const container = target.closest(".specjalna, .glowna");
-      if (!container) return;
-      const textInput = container.querySelector('input[type="text"]');
-      const skillName = textInput ? textInput.value : null;
-      const checkboxes = container.querySelectorAll("input.glowna-checkbox");
-      let skillValue = null;
-      checkboxes.forEach((checkbox) => {
-        if (checkbox.checked) {
-          skillValue = checkbox.getAttribute("data-val");
-        }
-      });
-      const actor = this.actor;
-      console.log("Actor class:", this.actor.constructor.name);
-
-      return this.actor.rollSkill(skillName, skillValue, actor);
-    
+    const container = target.closest(".glowna, .specjalna");
+    if (!container) return;
+    const textInput = container.querySelector('input[type="text"]');
+    const skillName = textInput?.value ?? null;
+    const checkboxes = container.querySelectorAll(
+      "input.glowna-checkbox, input.specjalna-checkbox",
+    );
+    let skillValue = null;
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        skillValue = checkbox.dataset.val;
+      }
+    });
+    const actor = this.actor;
+    return actor.rollSkill(skillName, skillValue, actor);
+  }
+  static async #setSkillValue(event){
+    const target = event.target;
+    let skillValue = Number(target.dataset.val)
+    if(!target.checked){
+      skillValue = Number(target.dataset.val) -1;
+    }
+    const skillKey = target.dataset.skilltype;
+    const cecha = target.dataset.key;
+    const actor = this.actor;
+    actor.setSkillValue(cecha, skillKey, skillValue);
   }
 }

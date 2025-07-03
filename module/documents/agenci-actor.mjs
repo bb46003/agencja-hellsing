@@ -32,13 +32,41 @@ export default class AgenciActor extends Actor {
           label: "Rzut",
           default: true,
           callback: async (event) => {
-            console.log(dialog.options.system);
-            console.log(event)
+            const baseNumberOfDice = Number(
+              dialog.options.system.wartoscUmiejetnosci,
+            );
+            const dialogHTML = event.currentTarget.lastChild;
+            const ulatwienia = Number(dialogHTML.querySelector(".ulatwienia").value);
+            const utrudnienia = Number(dialogHTML.querySelector(".utrudnienia").value);
+            const numberOfDice = baseNumberOfDice - utrudnienia + ulatwienia;
+            if (numberOfDice <= 0) {
+              //warning
+            } else {
+              const roll = new Roll(`${numberOfDice}d6`);
+
+              await roll.evaluate();
+
+              roll.toMessage({
+                speaker: ChatMessage.getSpeaker(),
+                flavor: `Rolling ${numberOfDice}d6`,
+              });
+            }
           },
         },
       ],
       system: dialogData,
     }).render(true);
+  }
+  async setSkillValue(cecha, skillKey, skillValue){
+    const skilLabel = this.system.cechy[cecha][skillKey].label;
+    const skill = `system.cechy.${cecha}.${skillKey}.value`
+    if(skilLabel === ""){
+      await this.update({[skill]:0})
+      //warning
+    }else{
+        await this.update({[skill]:skillValue})
+    }
+
   }
   async prepareAspekty(actor) {
     const itemsArray = Object.values(actor.items); // zamiana obiektu na tablicę

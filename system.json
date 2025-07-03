@@ -20,12 +20,12 @@
     "Actor": {
       "agenci": {}
     },
-    "Item":{
-      "aspekty":{},
-      "sprzet":{},
-      "talenty":{},
-      "klatwy":{},
-      "blogoslawiensta":{}
+    "Item": {
+      "aspekty": {},
+      "sprzet": {},
+      "talenty": {},
+      "klatwy": {},
+      "blogoslawiensta": {}
     }
   },
   "grid": {

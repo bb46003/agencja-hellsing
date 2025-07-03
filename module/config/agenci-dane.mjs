@@ -32,21 +32,21 @@ export const UMIEJETNOSCI = Object.freeze({
     sheetOrder: 1,
     nodeId: "gł",
   },
-  specjana1: {
-    id: "specjana1",
-    label: "Slecjana",
+  specjalna1: {
+    id: " specjalna1",
+    label: "Specjalna1",
     sheetOrder: 2,
     nodeId: "sp1",
   },
-  specjana2: {
-    id: "specjana2",
-    label: "Slecjana",
+   specjalna2: {
+    id: " specjalna2",
+    label: "Specjalna2",
     sheetOrder: 3,
     nodeId: "sp2",
   },
-  specjana3: {
-    id: "specjana3",
-    label: "Slecjana",
+   specjalna3: {
+    id: " specjalna3",
+    label: "Specjalna3",
     sheetOrder: 4,
     nodeId: "sp3",
   },
