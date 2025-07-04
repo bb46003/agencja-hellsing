@@ -15,7 +15,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     },
     actions: {
       skillRoll: AgenciActorSheet.#onskillRoll,
-      setSkillValue: AgenciActorSheet.#setSkillValue
+      setSkillValue: AgenciActorSheet.#setSkillValue,
     },
     form: {
       submitOnChange: true,
@@ -119,9 +119,17 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
 
     return context;
   }
-
+async activateListeners(html) { 
+  const selektorCech = html.querySelectorAll(".selector-cech");
+  selektorCech.forEach(cecha =>{
+    cecha.addEventListener("change", (ev) => this.zmianaCechy(ev))
+  })
+  
+}
   async render(force = false, options = {}) {
     await super.render(force, options);
+     const el = this.element;
+     this.activateListeners(el)
 
   }
   static async #onskillRoll(event) {
@@ -152,5 +160,8 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     const cecha = target.dataset.key;
     const actor = this.actor;
     actor.setSkillValue(cecha, skillKey, skillValue);
+  }
+  async zmianaCechy(event){
+    console.log(event.srcElement.value)
   }
 }

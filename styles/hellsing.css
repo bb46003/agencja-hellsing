@@ -1,4 +1,9 @@
-/* --- Sidebar and Actor Image --- */
+/* === Layout === */
+.hellsing.sheet.actor .window-content {
+  display: flex;
+  flex-direction: row;
+}
+
 .sidebar {
   height: 100%;
   width: 220px;
@@ -6,6 +11,7 @@
   overflow-y: auto;
 }
 
+/* === Actor Image and Info === */
 .actor-image {
   height: 100px;
   margin: auto;
@@ -25,20 +31,8 @@
 .actor-name input[type="text"] {
   text-align: center;
 }
-.cecha-pojedyncza {
-  width: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.przewaga {
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-}
-/* --- Cecha (Trait) Container --- */
+
+/* === Trait Blocks === */
 .cecha {
   border: 1px solid #ccc;
   padding: 1rem;
@@ -65,7 +59,12 @@
   width: auto;
 }
 
-/* --- Umiejętności (Skills) --- */
+.cecha-top input[type="number"] {
+  width: 40px;
+  text-align: center;
+}
+
+/* === Skill Containers === */
 .umiejetnosci {
   display: block;
   text-align: center;
@@ -81,32 +80,78 @@
   margin-top: 10px;
 }
 
-/* Each skill row */
 .lista-umiejetnosci > .glowna,
 .lista-umiejetnosci > .specjalna {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border: 1px solid #000; /* unified border for .glowna */
+  border: 1px solid #000;
 }
 
-/* Text inputs inside skills */
+.lista-umiejetnosci input[type="text"],
 .specjalna input[type="text"],
-.glowna input[type="text"],
-.lista-umiejetnosci input[type="text"] {
+.glowna input[type="text"] {
   flex: 1;
   max-width: 250px;
 }
 
-/* Checkbox group layout */
+/* === Single Skill and Advantage Rows === */
+.cecha-pojedyncza {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.przewaga {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+/* === Checkbox Group === */
 .checkbox-group {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   flex-wrap: nowrap;
 }
 
-/* --- Round checkbox styling --- */
+/* === Custom Checkbox Styling === */
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox .checkmark {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color: #ccc;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.custom-checkbox:hover .checkmark {
+  background-color: #bbb;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(236, 8, 8);
+  border-radius: 50%;
+}
+
+/* === Old Checkbox Styling (not used with .custom-checkbox) === */
+/* If you're now using only `.custom-checkbox`, this can be removed entirely */
 .glowna-checkbox {
   appearance: none;
   width: 20px;
@@ -120,35 +165,22 @@
   background-color: white;
 }
 
-/* Checked state with inner dot */
 .glowna-checkbox:checked {
   background-color: #007bff;
   border-color: #007bff;
 }
 
-.glowna-checkbox:checked::before {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 10px;
-  height: 10px;
-  background-color: white;
-  border-radius: 50%;
-}
-.hellsing.sheet.actor .window-content {
-  display: flex;
-  flex-direction: row;
-}
+/* === Obronne Section === */
 .obronne {
   text-align: center;
   margin: 20px;
 }
+
 .rzuty-obdronne {
-  display: flex; /* Arrange items in a row */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  gap: 10px; /* Optional space between label and input */ /* Optional: ensure vertical centering works inside a container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .rzuty-obdronne input {
@@ -156,10 +188,7 @@
   margin-left: auto;
   margin-right: 20px;
 }
-.cecha-top input[type="number"] {
-  width: 40px;
-  text-align: center;
-}
+
 .heder-obronne {
   text-align: center;
 }
