@@ -212,25 +212,40 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     const cecha = event.target.dataset.cecha;
     const actor = this.actor;
     let potrzebnyDialog = false;
-    switch (cecha) {
-      case "budowa":
-        if (actor.system.obronne.sila.value !== 0) {
-          potrzebnyDialog = true;
-        }
-        break;
-      case "kontrola":
-        if (
-          actor.system.obronne.refleks.value !== 0 ||
-          actor.system.obronne.wola.value !== 0
-        ) {
-          potrzebnyDialog = true;
-        }
-        break;
-      case "duch":
-      case "umysl":
-        if (actor.system.obronne.intuicja.value !== 0) {
-          potrzebnyDialog = true;
-        }
+    if (nowaWartosc !== 0) {
+      switch (cecha) {
+        case "budowa":
+          if (
+            actor.system.obronne.sila.value !== 0 &&
+            actor.system.cechy.budowa.value !== 0
+          ) {
+            potrzebnyDialog = true;
+          }
+          break;
+        case "kontrola":
+          if (
+            (actor.system.obronne.refleks.value !== 0 ||
+              actor.system.obronne.wola.value !== 0) &&
+            actor.system.cechy.kontrola.value !== 0
+          ) {
+            potrzebnyDialog = true;
+          }
+          break;
+        case "duch":
+          if (
+            actor.system.obronne.intuicja.value !== 0 &&
+            actor.system.cechy.duch.value !== 0
+          ) {
+            potrzebnyDialog = true;
+          }
+        case "umysl":
+          if (
+            actor.system.obronne.intuicja.value !== 0 &&
+            actor.system.cechy.umysl.value !== 0
+          ) {
+            potrzebnyDialog = true;
+          }
+      }
     }
     if (potrzebnyDialog) {
       const dialog = new foundry.applications.api.DialogV2({
