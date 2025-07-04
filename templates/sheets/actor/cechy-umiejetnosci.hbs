@@ -4,7 +4,7 @@
             <div class="cecha-top">
                 <div class="cecha-pojedyncza">
                     <label class="cecha-name">{{capital @key}}</label>
-                    <select class="selector-cech" name="system.cechy.{{@key}}.value" data-action="zmianaCechy">
+                    <select class="selector-cech" name="system.cechy.{{@key}}.value" data-cecha="{{@key}}">
                     {{#each (array 0 1 2 3)}}
                         <option value="{{this}}" {{#ifEquals this ../value}}selected{{/ifEquals}} >{{this}}</option>
                     {{/each}}

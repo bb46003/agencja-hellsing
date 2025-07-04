@@ -38,13 +38,13 @@ export const UMIEJETNOSCI = Object.freeze({
     sheetOrder: 2,
     nodeId: "sp1",
   },
-   specjalna2: {
+  specjalna2: {
     id: " specjalna2",
     label: "Specjalna2",
     sheetOrder: 3,
     nodeId: "sp2",
   },
-   specjalna3: {
+  specjalna3: {
     id: " specjalna3",
     label: "Specjalna3",
     sheetOrder: 4,

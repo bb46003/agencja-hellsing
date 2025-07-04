@@ -36,8 +36,12 @@ export default class AgenciActor extends Actor {
               dialog.options.system.wartoscUmiejetnosci,
             );
             const dialogHTML = event.currentTarget.lastChild;
-            const ulatwienia = Number(dialogHTML.querySelector(".ulatwienia").value);
-            const utrudnienia = Number(dialogHTML.querySelector(".utrudnienia").value);
+            const ulatwienia = Number(
+              dialogHTML.querySelector(".ulatwienia").value,
+            );
+            const utrudnienia = Number(
+              dialogHTML.querySelector(".utrudnienia").value,
+            );
             const numberOfDice = baseNumberOfDice - utrudnienia + ulatwienia;
             if (numberOfDice <= 0) {
               //warning
@@ -57,19 +61,18 @@ export default class AgenciActor extends Actor {
       system: dialogData,
     }).render(true);
   }
-  async setSkillValue(cecha, skillKey, skillValue){
+  async setSkillValue(cecha, skillKey, skillValue) {
     const skilLabel = this.system.cechy[cecha][skillKey].label;
-    const skill = `system.cechy.${cecha}.${skillKey}.value`
-    if(skilLabel === ""){
-      await this.update({[skill]:0})
+    const skill = `system.cechy.${cecha}.${skillKey}.value`;
+    if (skilLabel === "") {
+      await this.update({ [skill]: 0 });
       //warning
-    }else{
-        await this.update({[skill]:skillValue})
+    } else {
+      await this.update({ [skill]: skillValue });
     }
-
   }
   async prepareAspekty(actor) {
-    const itemsArray = Object.values(actor.items); // zamiana obiektu na tablicę
+    const itemsArray = Object.values(actor.items);
     const aspekty = itemsArray.filter((item) => item.type === "aspekt");
     return aspekty;
   }
@@ -77,6 +80,6 @@ export default class AgenciActor extends Actor {
   async prepareSprzet(actor) {
     const itemsArray = Object.values(actor.items);
     const sprzet = itemsArray.filter((item) => item.type === "sprzet");
-    return sprzet; // warto zwrócić wynik, tak jak w prepareAspekty
+    return sprzet;
   }
 }
