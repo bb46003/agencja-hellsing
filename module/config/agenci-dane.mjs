@@ -78,3 +78,43 @@ export const OBRONNE = Object.freeze({
     nodeId: 4,
   },
 });
+
+export const WITALNOSC_MOC_DMG = Object.freeze({
+  value:{
+    id: "pz",
+    label: "Intuicja",
+    sheetOrder: 1,
+    nodeId: 1,
+  },
+  regeneracja:{
+    id: "reg",
+    label: "Regeneracja",
+    sheetOrder: 2,
+    nodeId: 2,
+  },
+  obrazenia:{
+    id: "dmg",
+    label: "Obrażenia",
+    sheetOrder: 3,
+    nodeId: 3,
+  },
+    obrazenia_temp:{
+    id: "dmg_temp",
+    label: "Obrażenia Tymczasowe",
+    sheetOrder: 4,
+    nodeId: 4,
+  },
+  moc:{
+      id: "moc",
+    label: "Moc",
+    sheetOrder: 5,
+    nodeId: 5,
+  },
+  zuzyta_moc:{
+      id: "moc_wyk",
+    label: "Zurzywa Moc",
+    sheetOrder: 5,
+    nodeId: 5,
+  }
+
+})

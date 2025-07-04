@@ -1,3 +1,5 @@
+import { SYSTEM } from "../config/system.mjs";
+
 export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
   /* -------------------------------------------- */
   /*  Data Schema                                 */
@@ -83,6 +85,23 @@ export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
 
         return obj;
       }, {}),
+    );
+    schema.witalnosc_moc_dmg = new fields.SchemaField(
+      Object.values(SYSTEM.WITALNOSC_MOC_DMG).reduce((obj,witalnosc_moc_dmg )=>{
+            obj[witalnosc_moc_dmg.id] = new fields.SchemaField(
+          {
+            value: new fields.NumberField({
+              ...requiredInteger,
+              initial: 0,
+              min: 0,
+              max: 999,
+            }),
+          },
+          { label: witalnosc_moc_dmg.label },
+        );
+
+        return obj;
+      }, {})
     );
 
     return schema;

@@ -21,7 +21,7 @@
                 <div class="lista-umiejetnosci">
                     <div class="glowna" data-key="{{@key}}">                       
                         {{#if (notEmpty (lookup (lookup (lookup ../system.cechy @key) "glowna") "label"))}}
-                            <a class="fas fa-dice-d6" data-action="skillRoll"></a>
+                            <a class="fas fa-dice-d6" data-action="skillRoll" data-tooltip="Kliknij aby rzucić"></a>
                         {{/if}}
                         <input type="text"  name="system.cechy.{{@key}}.glowna.label" value="{{lookup (lookup (lookup ../system.cechy @key) "glowna") "label"}}"  />
                         <div class="checkbox-group">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="specjalna" data-key="{{@key}}">
                         {{#if (notEmpty (lookup (lookup (lookup ../system.cechy @key) "specjalna1") "label"))}}
-                            <a class="fas fa-dice-d6"  data-action = "skillRoll"></a>
+                            <a class="fas fa-dice-d6"  data-action = "skillRoll" data-tooltip="Kliknij aby rzucić"></a>
                         {{/if}}
                         <input type="text"   name="system.cechy.{{@key}}.specjalna1.label" value="{{lookup (lookup (lookup ../system.cechy @key) "specjalna1") "label"}}" />
                         <div class="checkbox-group">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="specjalna" data-key="{{@key}}">
                         {{#if (notEmpty (lookup (lookup (lookup ../system.cechy @key) "specjalna2") "label"))}}
-                            <i class="fas fa-dice-d6" data-action="skillRoll"></i>
+                            <i class="fas fa-dice-d6" data-action="skillRoll" data-tooltip="Kliknij aby rzucić"></i>
                         {{/if}}
                         <input type="text"  name="system.cechy.{{@key}}.specjalna2.label" value="{{lookup (lookup (lookup ../system.cechy @key) "specjalna2") "label"}}"/>
                         <div class="checkbox-group">
@@ -78,7 +78,7 @@
                     </div>
                     <div class="specjalna" data-key="{{@key}}">
                         {{#if (notEmpty (lookup (lookup (lookup ../system.cechy @key) "specjalna3") "label"))}}
-                            <i class="fas fa-dice-d6" data-action="skillRoll"></i>
+                            <i class="fas fa-dice-d6" data-action="skillRoll" data-tooltip="Kliknij aby rzucić"></i>
                         {{/if}}
                         <input type="text"name="system.cechy.{{@key}}.specjalna3.label" value="{{lookup (lookup (lookup ../system.cechy @key) "specjalna3") "label"}}"/>
                         <div class="checkbox-group">
