@@ -1,35 +1,41 @@
-<section class="sidebar">
+<section class="sidebar-actor">
   <div class="actor-info">
     <img src="{{actor.img}}" alt="{{actor.name}}" class="actor-image" />
     <h2 class="actor-name"><input type="text"  value="{{actor.name}}" name="name"></h2>
   </div>
   <div class="sidebar-stat">
-    <label class="heder-sidebar">PUNKTY ŻYCIA</label>
-    {{log ../system.witalnosc_moc_dmg.pz.value}}
-    <input type="number" name="system.witalnosc_moc_dmg.pz.value" value="{{actor.system.witalnosc_moc_dmg.pz.value}}">
+     <h3 class="heder-sidebar">PUNKTY ŻYCIA</h3>
+    <div class="pz">
+      <div class="opis-pz">
+        <label class="heder-sidebar">OBECNE</label>
+        <input type="number" name="system.witalnosc_moc_dmg.dmg.value" value="{{actor.system.witalnosc_moc_dmg.dmg.value}}">
+      </div>
+      <div class="opis-pz">
+         <label class="heder-sidebar">MAKSYMALNE</label> 
+        <input type="number" name="system.witalnosc_moc_dmg.pz.value" value="{{actor.system.witalnosc_moc_dmg.pz.value}}">
+      </div>
+      <div class="opis-pz">
+        <label class="heder-sidebar">REGENERACJA</label>   
+        <input type="number" name="system.witalnosc_moc_dmg.reg.value" value="{{actor.system.witalnosc_moc_dmg.reg.value}}">
+      </div>
+      <div class="opis-pz">
+        <label class="heder-sidebar">TYMCZASOWE</label>
+        <input type="number" name="system.witalnosc_moc_dmg.dmg_temp.value" value="{{actor.system.witalnosc_moc_dmg.dmg_temp.value}}">
+      </div>
+    </div>
   </div>
-   <div class="sidebar-stat">
-    <label class="heder-sidebar">REGENERACJA</label>   
-    <input type="number" name="system.witalnosc_moc_dmg.reg.value" value="{{actor.system.witalnosc_moc_dmg.reg.value}}">
   </div>
   <div class="sidebar-stat">
-    <div class="part-stat">
-    <label class="heder-sidebar">OBRAŻENIA</label>
-    <input type="number" name="system.witalnosc_moc_dmg.dmg.value" value="{{actor.system.witalnosc_moc_dmg.dmg.value}}">
-    </div>
-    <div class="part-stat">
-    <label class="heder-sidebar">TYMCZASOWE</label>
-    <input type="number" name="system.witalnosc_moc_dmg.dmg_temp.value" value="{{actor.system.witalnosc_moc_dmg.dmg_temp.value}}">
-    </div>
-  </div>
-   <div class="sidebar-stat">
-    <div class="part-stat">
-    <label class="heder-sidebar">MOC</label>
-    <input type="number" name="system.witalnosc_moc_dmg.moc.value" value="{{actor.system.witalnosc_moc_dmg.moc.value}}">
-    </div>
-      <div class="part-stat">
-    <label class="heder-sidebar">ZUŻYTE</label>
-    <input type="number" name="system.witalnosc_moc_dmg.moc_wyk.value" value="{{actor.system.witalnosc_moc_dmg.moc_wyk.value}}">
+    <h3 class="heder-sidebar">MOC</h3>
+    <div class="pz">
+      <div class="opis-pz">
+        <label class="heder-sidebar">DOSTEPNE</label>
+        <input type="number" name="system.witalnosc_moc_dmg.moc.value" value="{{actor.system.witalnosc_moc_dmg.moc.value}}">
+      </div>
+      <div class="opis-pz">
+        <label class="heder-sidebar">ZUŻYTE</label>
+        <input type="number" name="system.witalnosc_moc_dmg.moc_wyk.value" value="{{actor.system.witalnosc_moc_dmg.moc_wyk.value}}">
+      </div>
     </div>
   </div>
 

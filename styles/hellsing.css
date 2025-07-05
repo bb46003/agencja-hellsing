@@ -1,12 +1,13 @@
 /* === Layout === */
-.hellsing.sheet.actor .window-content {
+.hellsing.sheet.agenci .window-content {
   display: flex;
   flex-direction: row;
+  overflow: visible;
 }
 
-.sidebar {
+.sidebar-actor {
   height: 100%;
-  width: 310px;
+  max-width: 200px;
   border: solid 1px #ccc;
   overflow-y: auto;
 }
@@ -19,12 +20,10 @@
 
 .actor-info,
 .cechy {
-  margin: 0 10px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
+      margin: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .actor-name input[type="text"] {
@@ -33,13 +32,14 @@
 
 /* === Trait Blocks === */
 .cecha {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-      width: 280px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    /* margin-bottom: 1rem; */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 280px;
+    min-height: 49%;
 }
 
 .cecha > .cecha-top {
@@ -177,7 +177,6 @@
 }
 .rzuty-obdronne {
     display: flex;
-    width: 60%;
     align-items: center;
     gap: 10px;
     justify-content: space-between;
@@ -187,25 +186,48 @@
 .rzuty-obdronne input {
   width: 50px;
   margin-left: auto;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 .sidebar-stat input{
   width: 50px;
   text-align: center;
+      margin-right: 10px;
 }
 .heder-sidebar {
      text-align: center;
     margin-top: 5px;
     margin-bottom: 5px;
-}
-.sidebar-stat, .part-stat{
-      display: flex;
-    justify-content: space-between;
-    margin: 5px;
-        align-items: center;
-            gap: 5px;
+        margin-left: 5px;
 }
 .part-stat{
   margin: 0px;
   width: 50%;
+}
+.sheet-tabs.tabs{
+ --tab-size: 32px;
+    --icon-size: 28px;
+    flex-direction: column;
+    position: absolute;
+    width: calc(var(--tab-size) + 4px);
+    right: calc(-1*(var(--tab-size) + 4px));
+    top: 90px;
+    padding: 4px 4px 4px 0;
+    gap: var(--margin-half);
+    border: none;
+    overflow: hidden;
+}
+.opis-pz{
+      width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+.tab-icon{
+  border: solid 1px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    width: 30px;
+}
+.sheet.hellsing.agenci{
+  overflow: visible;
 }

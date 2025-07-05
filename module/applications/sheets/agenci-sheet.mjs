@@ -7,10 +7,10 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
   sheets.ActorSheetV2,
 ) {
   static DEFAULT_OPTIONS = {
-    classes: ["hellsing", "actor", "standard-form", "themed", "theme-dark"],
+    classes: ["hellsing", "agenci", "standard-form", "themed", "theme-dark"],
     tag: "form",
     position: {
-      width: 900,
+      width: 820,
       height: 760,
     },
     actions: {
