@@ -100,9 +100,11 @@ export default class hellsingRoll {
     const rutzHTML =  await rzut.render(true);
     const content = await this.modifyRollTemplate(rutzHTML)
     let flavor = `<div class="hellsing-roll data-action="expandRoll">`
+    if(sukcesy === 0){
      flavor += "NIe zdobyto żadnego sukcesu";
+    }
     if(sukcesy !== 0){
-     flavor = `Zdobyta liczba sukswsów to: <strong>${sukcesy}</strong> `
+     flavor += `Zdobyta liczba sukswsów to: <strong>${sukcesy}</strong> `
     };
     if(pech > Math.floor(iloscKostek/2)){
         flavor += "Masz <strong>PECHA</strong>!"

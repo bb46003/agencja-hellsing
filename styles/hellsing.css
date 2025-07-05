@@ -229,10 +229,16 @@
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     width: 30px;
+    background: black;
 }
 .heder-tabs{
   width: 100%;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
+}
+.hellsing-roll{
+      font-size: larger;
+    border: solid 1px;
+    padding: 5px;
 }
