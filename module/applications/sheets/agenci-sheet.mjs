@@ -11,7 +11,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     tag: "form",
     position: {
       width: 820,
-      height: 760,
+      height: 'auto',
     },
     actions: {
       skillRoll: AgenciActorSheet.#onskillRoll,
@@ -28,6 +28,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
 
   /** @override */
   static PARTS = {
+ 
     sidebar: {
       id: "sidebar",
       template: "systems/agencja-hellsing/templates/sheets/actor/sidebar.hbs",
@@ -36,25 +37,23 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       id: "tabs",
       template: "systems/agencja-hellsing/templates/sheets/actor/tabs.hbs",
     },
-    body: {
-      id: "body",
-      template: "systems/agencja-hellsing/templates/sheets/actor/body.hbs",
-    },
-    cechy_umiejetnosci: {
-      id: "cechy-umiejetnosci",
+    cechy_glowne: {
+      id: "cechy_glowne",
       template:
-        "systems/agencja-hellsing/templates/sheets/actor/cechy-umiejetnosci.hbs",
+        "systems/agencja-hellsing/templates/sheets/actor/tabs/cechy-umiejetnosci.hbs",
     },
+    aspekty_talenty: {
+      id: "aspekty_talenty",
+      template:"systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
+    }
+    
   };
 
   /** At least one tab is required to avoid rendering errors */
   static TABS = {
     sheet: [
-      {
-        id: "main",
-        label: "Main",
-        icon: "fa-solid fa-user",
-      },
+      { id: "cechy_glowne",  group: "sheet"},
+      { id: "aspekty_talenty",  group: "sheet"}
     ],
   };
 
@@ -81,10 +80,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
         const isGM = game.user.isGM;
         let active = false;
 
-        if (isGM && t.id === "settings" && activeTab === "") {
-          active = true;
-        }
-        if (!isGM && t.id === "buingStuff" && activeTab === "") {
+        if (isGM && t.id === "cechy_glowne" && activeTab === "") {
           active = true;
         }
         if (activeTab !== "" && t.id === activeTab) {
@@ -99,16 +95,14 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       }
       tabs[groupId] = group;
     }
-
     return tabs;
   }
 
   async getData() {
     const actorData = this.actor.toObject(false);
     const tabGroups = this.#getTabs();
-
     const context = {
-      tabs: tabGroups.sheet ?? [],
+      tabs: tabGroups.sheet,
       actor: this.document,
       system: actorData.system,
       fields: this.document.system?.schema?.fields ?? {},
@@ -127,6 +121,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       cecha.addEventListener("change", (ev) => this.actor.zmianaDodatkowychCech(ev));
     });
   }
+ 
   async render(force = false, options = {}) {
     await super.render(force, options);
     const el = this.element;

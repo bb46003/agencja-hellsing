@@ -28,4 +28,24 @@ Hooks.once("init", async function () {
     makeDefault: true,
   });
   registerHandlebarsHelpers();
+    preloadHandlebarsTemplates();
 });
+async function preloadHandlebarsTemplates() {
+  if (game.release.generation < 13) {
+    return loadTemplates([
+ "systems/agencja-hellsing/templates/sheets/actor/sidebar.hbs", 
+        "systems/agencja-hellsing/templates/sheets/actor/tabs.hbs", 
+        "systems/agencja-hellsing/templates/sheets/actor/tabs/cechy-umiejetnosci.hbs",
+        "systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
+    ]);
+  } else {
+    foundry.applications.handlebars.loadTemplates([
+ "systems/agencja-hellsing/templates/sheets/actor/sidebar.hbs", 
+        "systems/agencja-hellsing/templates/sheets/actor/tabs.hbs", 
+        "systems/agencja-hellsing/templates/sheets/actor/tabs/cechy-umiejetnosci.hbs",
+        "systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
+    ]);
+  }
+}
+    
+       

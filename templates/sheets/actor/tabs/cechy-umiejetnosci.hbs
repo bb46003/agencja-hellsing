@@ -1,4 +1,7 @@
-<section class="cechy active"   action-data="tab"  data-group="sheet"  data-tab="cechy">
+<section class="tab cechy_glowne {{tabs.cechy_glowne.cssClass}}"   
+    action-data="tab"  data-group="sheet"  data-tab="cechy_glowne">
+   <h3 class="heder-tabs">CECHY I UMIEJĘTNOŚCI</h3>
+    <div class="cechy-agenta">
     {{#each actor.system.cechy}}
         <div class="cecha">
             <div class="cecha-top">
@@ -99,4 +102,5 @@
             </div>
         </div>
     {{/each}}
+    </div>
 </section>

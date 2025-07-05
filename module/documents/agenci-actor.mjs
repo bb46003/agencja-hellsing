@@ -1,4 +1,5 @@
-import agenci_Utility from "../utility.mjs";
+
+import hellsingRoll from "../roll/rolls.mjs";
 
 export default class AgenciActor extends Actor {
   constructor(...args) {
@@ -10,67 +11,15 @@ export default class AgenciActor extends Actor {
   get obronne() {
     return this.system.obronne;
   }
-  async rollSkill(skillName, skillValue, actor) {
-    const aspekty = await this.prepareAspekty(actor);
-    const sprzet = await this.prepareSprzet(actor);
-    const dialogData = {
-      umiejtnosc: skillName,
-      wartoscUmiejetnosci: skillValue,
-      aspekty: aspekty || [],
-      sprzet: sprzet || [],
-    };
-    const html = await agenci_Utility.renderTemplate(
-      "systems/agencja-hellsing/templates/dialog/umiejetnosc-roll.hbs",
-      dialogData,
-    );
-    const dialog = await new foundry.applications.api.DialogV2({
-      window: { title: `Rzut na ${skillName}` },
-      content: html,
-      buttons: [
-        {
-          action: "rzut",
-          label: "Rzut",
-          default: true,
-          callback: async (event) => {
-            const baseNumberOfDice = Number(
-              dialog.options.system.wartoscUmiejetnosci,
-            );
-            const dialogHTML = event.currentTarget.lastChild;
-            const ulatwienia = Number(
-              dialogHTML.querySelector(".ulatwienia").value,
-            );
-            const utrudnienia = Number(
-              dialogHTML.querySelector(".utrudnienia").value,
-            );
-            const numberOfDice = baseNumberOfDice - utrudnienia + ulatwienia;
-            if (numberOfDice <= 0) {
-              //warning
-            } else {
-              const roll = new Roll(`${numberOfDice}d6`);
-
-              await roll.evaluate();
-
-              roll.toMessage({
-                speaker: ChatMessage.getSpeaker(),
-                flavor: `Rolling ${numberOfDice}d6`,
-              });
-            }
-          },
-        },
-      ],
-      system: dialogData,
-    }).render(true);
-  }
+ async rollSkill(skillName, skillValue, actor){
+    const sillRoll = new hellsingRoll(actor)
+    sillRoll.rollSkill(skillName, skillValue, actor)
+ }
   async rzutObronny(obronnyNazwa){
-    const iloscKosci = this.system.obronne[obronnyNazwa].value;
-    const rzut = new Roll(`${iloscKosci}d6`)
-    const nazwa = obronnyNazwa.toUpperCase();
-    rzut.toMessage({
-      speaker: ChatMessage.getSpeaker(),
-      flavor: `Rzut obronny na ${nazwa}`
-    })
+    const rzutObronny = new hellsingRoll(this.actor)
+    rzutObronny.rzutObronny(obronnyNazwa, actor)
   }
-  async setSkillValue(cecha, skillKey, skillValue) {
+    async setSkillValue(cecha, skillKey, skillValue) {
     const skilLabel = this.system.cechy[cecha][skillKey].label;
     const skill = `system.cechy.${cecha}.${skillKey}.value`;
     if (skilLabel === "") {
@@ -80,18 +29,6 @@ export default class AgenciActor extends Actor {
       await this.update({ [skill]: skillValue });
     }
   }
-  async prepareAspekty(actor) {
-    const itemsArray = Object.values(actor.items);
-    const aspekty = itemsArray.filter((item) => item.type === "aspekt");
-    return aspekty;
-  }
-
-  async prepareSprzet(actor) {
-    const itemsArray = Object.values(actor.items);
-    const sprzet = itemsArray.filter((item) => item.type === "sprzet");
-    return sprzet;
-  }
-
   async zmianaDodatkowychCech(event) {
     const nowaWartosc = Number(event.target.value);
     const cecha = event.target.dataset.cecha;
@@ -159,7 +96,10 @@ export default class AgenciActor extends Actor {
     switch (cecha) {
       case "budowa":
         await actor.update({ ["system.obronne.sila.value"]: nowaWartosc });
-        await actor.update({ ["system.witalnosc_moc_dmg.pz.value"]: nowaWartosc*10+20 });
+        await actor.update({
+          ["system.witalnosc_moc_dmg.pz.value"]: nowaWartosc*10+20,
+          ["system.witalnosc_moc_dmg.dmg.value"]:nowaWartosc*10+20
+         });
         break;
 
       case "kontrola":

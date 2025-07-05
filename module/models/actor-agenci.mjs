@@ -88,12 +88,17 @@ export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
     );
     schema.witalnosc_moc_dmg = new fields.SchemaField(
       Object.values(SYSTEM.WITALNOSC_MOC_DMG).reduce((obj,witalnosc_moc_dmg )=>{
+        let initialValue = 0;
+        if(witalnosc_moc_dmg.id === "reg"){
+          initialValue = 5;
+        } 
+        console.log(initialValue)
             obj[witalnosc_moc_dmg.id] = new fields.SchemaField(
           {
             value: new fields.NumberField({
               ...requiredInteger,
-              initial: 0,
-              min: 0,
+              initial: initialValue,
+              min: initialValue,
               max: 999,
             }),
           },
