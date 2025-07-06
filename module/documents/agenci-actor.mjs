@@ -16,8 +16,8 @@ export default class AgenciActor extends Actor {
     sillRoll.rollSkill(skillName, skillValue, actor)
  }
   async rzutObronny(obronnyNazwa){
-    const rzutObronny = new hellsingRoll(this.actor)
-    rzutObronny.rzutObronny(obronnyNazwa, actor)
+    const rzutObronny = new hellsingRoll(this)
+    rzutObronny.rzutObronny(obronnyNazwa, this)
   }
     async setSkillValue(cecha, skillKey, skillValue) {
     const skilLabel = this.system.cechy[cecha][skillKey].label;

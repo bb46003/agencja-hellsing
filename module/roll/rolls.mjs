@@ -97,9 +97,21 @@ export default class hellsingRoll {
             pech ++;
         }
     });
-    const rutzHTML =  await rzut.render(true);
-    const content = await this.modifyRollTemplate(rutzHTML)
-    let flavor = `<div class="hellsing-roll data-action="expandRoll">`
+    const html = await agenci_Utility.renderTemplate(
+      "systems/agencja-hellsing/templates/chat/roll.hbs",
+      {formula: wynik.formula, 
+        kostki: kostki,
+        ranny: ranny
+      },
+    );
+    let type = "";
+    if(dane.type === "skill"){
+      type = "umiejętności"
+    }
+    else{
+      type = "rzutu obronnego"
+    }
+    let flavor = `<h3 class="chat-heder">Test ${type} ${dane.nazwa}</h3><div class="hellsing-roll data-action="expandRoll">`
     if(sukcesy === 0){
      flavor += "NIe zdobyto żadnego sukcesu";
     }
@@ -114,53 +126,17 @@ export default class hellsingRoll {
          speaker = ChatMessage.getSpeaker({ actor: this.actor })
      }
      flavor += `</div>`
+     const titleHTML = `<h3>Test ${dane.nazwa}</h3>`
     const chatData = {
+                title: titleHTML,
                 user: game.user?._id,
                 speaker: speaker,
                 flavor: flavor,
-                content: content,
+                content: html,
+                roll: wynik
             };
-            await ChatMessage.create(chatData);
+  
+    await ChatMessage.create(chatData);
   }
-  async modifyRollTemplate(html) {
-                html = html.replace(
-                    /<div class="dice-roll"/,
-                    '<div class="dice-roll expanded"'
-                );
-                  html = html.replace(
-                    /data-action="expandRoll"/,
-                    ''
-                );
 
-                html = html.replace(
-                    /<h4 class="dice-total">.*?<\/h4>/s,
-                    ''
-                );
-                html = html.replace(
-                    /<div class="dice-formula">.*?<\/div>/s,
-                    ''
-                );
-                html = html.replace(
-                /<span class="part-total">.*?<\/span>/gs,
-                ''
-                );
-                html = html.replace(
-                    /<span class="part-formula">6d6x<\/span>/,
-                    ''
-                );
-                html = html.replace(
-                    /<li class="roll die d6">(.*?)<\/li>/g,
-                    (match, p1) => {
-                        const num = parseInt(p1.trim(), 10);
-                        if (num === 5) {
-                            return match.replace(
-                                /class="roll die d6"/,
-                                'class="roll die d6 max"'
-                            );
-                        }
-                        return match;
-                    }
-                );
-                return html;
-            }
 }

@@ -242,3 +242,15 @@
     border: solid 1px;
     padding: 5px;
 }
+.formula-roll{
+  border-bottom: solid 1px;
+    text-align: center;
+    font-size: larger;
+  }
+  .dice-rolls.hellsing{
+    display: flex;
+    justify-content: center;
+  }
+  .chat-heder{
+    font-size: medium;
+  }

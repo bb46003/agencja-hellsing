@@ -1,0 +1,16 @@
+<div class="formula-roll">{{formula}}</div>
+<div class="dice-tooltip">
+    <div class="dice">
+        <ol class="dice-rolls hellsing">
+            {{#each kostki as |kostka|}}
+                {{#if (or (and ranny (lte kostka.result 2)) (and (not ranny) (eq kostka.result 1)))}}
+                    <li class="roll die d6 min">{{kostka.result}}</li>
+                {{else if (gte kostka.result 5)}}
+                    <li class="roll die d6 max">{{kostka.result}}</li>
+                {{else}}
+                    <li class="roll die d6">{{kostka.result}}</li>
+                {{/if}}
+            {{/each}}
+        </ol>
+    </div>
+</div>
