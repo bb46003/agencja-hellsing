@@ -50,4 +50,11 @@ export function registerHandlebarsHelpers() {
       return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
     },
   });
+  Handlebars.registerHelper("isLekkie", function (key) {
+    if (key.includes("lekka")) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 }

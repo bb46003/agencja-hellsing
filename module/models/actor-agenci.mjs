@@ -87,26 +87,45 @@ export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
       }, {}),
     );
     schema.witalnosc_moc_dmg = new fields.SchemaField(
-      Object.values(SYSTEM.WITALNOSC_MOC_DMG).reduce((obj,witalnosc_moc_dmg )=>{
-        let initialValue = 0;
-        if(witalnosc_moc_dmg.id === "reg"){
-          initialValue = 5;
-        } 
-        console.log(initialValue)
-            obj[witalnosc_moc_dmg.id] = new fields.SchemaField(
+      Object.values(SYSTEM.WITALNOSC_MOC_DMG).reduce(
+        (obj, witalnosc_moc_dmg) => {
+          let initialValue = 0;
+          if (witalnosc_moc_dmg.id === "reg") {
+            initialValue = 5;
+          }
+          obj[witalnosc_moc_dmg.id] = new fields.SchemaField(
+            {
+              value: new fields.NumberField({
+                ...requiredInteger,
+                initial: initialValue,
+                min: initialValue,
+                max: 999,
+              }),
+            },
+            { label: witalnosc_moc_dmg.label },
+          );
+
+          return obj;
+        },
+        {},
+      ),
+    );
+    schema.rany = new fields.SchemaField(
+      Object.values(SYSTEM.RANY).reduce((obj, rana) => {
+        obj[rana.id] = new fields.SchemaField(
           {
-            value: new fields.NumberField({
-              ...requiredInteger,
-              initial: initialValue,
-              min: initialValue,
-              max: 999,
+            value: new fields.StringField({
+              initial: "",
+              maxLength: 50,
+              validator: (value) =>
+                /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s]*$/.test(value),
             }),
           },
-          { label: witalnosc_moc_dmg.label },
+          { label: rana.label },
         );
 
         return obj;
-      }, {})
+      }, {}),
     );
 
     return schema;

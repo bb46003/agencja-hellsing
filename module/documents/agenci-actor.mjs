@@ -1,4 +1,3 @@
-
 import hellsingRoll from "../roll/rolls.mjs";
 
 export default class AgenciActor extends Actor {
@@ -11,15 +10,15 @@ export default class AgenciActor extends Actor {
   get obronne() {
     return this.system.obronne;
   }
- async rollSkill(skillName, skillValue, actor){
-    const sillRoll = new hellsingRoll(actor)
-    sillRoll.rollSkill(skillName, skillValue, actor)
- }
-  async rzutObronny(obronnyNazwa){
-    const rzutObronny = new hellsingRoll(this)
-    rzutObronny.rzutObronny(obronnyNazwa, this)
+  async rollSkill(skillName, skillValue, actor) {
+    const sillRoll = new hellsingRoll(actor);
+    sillRoll.rollSkill(skillName, skillValue, actor);
   }
-    async setSkillValue(cecha, skillKey, skillValue) {
+  async rzutObronny(obronnyNazwa) {
+    const rzutObronny = new hellsingRoll(this);
+    rzutObronny.rzutObronny(obronnyNazwa, this);
+  }
+  async setSkillValue(cecha, skillKey, skillValue) {
     const skilLabel = this.system.cechy[cecha][skillKey].label;
     const skill = `system.cechy.${cecha}.${skillKey}.value`;
     if (skilLabel === "") {
@@ -97,9 +96,9 @@ export default class AgenciActor extends Actor {
       case "budowa":
         await actor.update({ ["system.obronne.sila.value"]: nowaWartosc });
         await actor.update({
-          ["system.witalnosc_moc_dmg.pz.value"]: nowaWartosc*10+20,
-          ["system.witalnosc_moc_dmg.dmg.value"]:nowaWartosc*10+20
-         });
+          ["system.witalnosc_moc_dmg.pz.value"]: nowaWartosc * 10 + 20,
+          ["system.witalnosc_moc_dmg.dmg.value"]: nowaWartosc * 10 + 20,
+        });
         break;
 
       case "kontrola":

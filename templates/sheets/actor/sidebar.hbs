@@ -4,7 +4,7 @@
     <h2 class="actor-name"><input type="text"  value="{{actor.name}}" name="name"></h2>
   </div>
   <div class="sidebar-stat">
-     <h3 class="heder-sidebar">PUNKTY ŻYCIA</h3>
+    <h3 class="heder-sidebar">PUNKTY ŻYCIA</h3>
     <div class="pz">
       <div class="opis-pz">
         <label class="heder-sidebar">OBECNE</label>
@@ -24,7 +24,6 @@
       </div>
     </div>
   </div>
-  </div>
   <div class="sidebar-stat">
     <h3 class="heder-sidebar">MOC</h3>
     <div class="pz">
@@ -39,11 +38,28 @@
     </div>
   </div>
 
-  <h3 class="heder-sidebar">Rzuty Obronne</h3>
+  <h3 class="heder-sidebar">RZUTY OBRONNE</h3>
   {{#each actor.system.obronne}}
     <div class="rzuty-obdronne">
       <label data-action="deffRoll" data-obronny="{{@key}}" class="obronne" data-tooltip="Kliknij aby rzucić">{{capital @key}}</label>
       <input type="number" name="system.obronne.{{@key}}.value" value="{{lookup (lookup ../system.obronne @key) 'value'}}">
     </div>
   {{/each}}
+  <h3 class="heder-sidebar">RANY</h3>
+  <div class="rany">
+        <label class="heder-sidebar">LEKKIE</label>
+         {{#each system.rany}}
+            {{#if (isLekkie @key) }}
+            <input type="text" name='system.rany.{{@key}}.value' value="{{lookup (lookup ../system.rany @key) "value"}}">
+            {{/if}}
+          {{/each}}
+  </div>
+  <div class="rany">
+        <label class="heder-sidebar">CIĘŻKIE</label>
+        {{#each system.rany}}
+            {{#if (eq (isLekkie @key) false)}}
+            <input type="text" name='system.rany.{{@key}}.value' value="{{lookup (lookup ../system.rany @key) "value"}}">   
+            {{/if}}
+          {{/each}}
+  </div>
 </section>

@@ -1,9 +1,9 @@
 import agenci_Utility from "../utility.mjs";
 
 export default class hellsingRoll {
-     constructor(actor){
-        this.actor = actor
-     }
+  constructor(actor) {
+    this.actor = actor;
+  }
   async rollSkill(skillName, skillValue, actor) {
     const aspekty = await this.prepareAspekty(actor);
     const sprzet = await this.prepareSprzet(actor);
@@ -40,16 +40,16 @@ export default class hellsingRoll {
             if (numberOfDice <= 0) {
               //warning
             } else {
-            const rzut = await new Roll(`${numberOfDice}d6`);
-            const dane = {
+              const rzut = await new Roll(`${numberOfDice}d6`);
+              const dane = {
                 type: "skill",
                 nazwa: skillName.toUpperCase(),
                 aspekty: [],
                 sprzet: [],
                 ulatwienia: ulatwienia,
-                utrudnienia: utrudnienia
-            }
-            this.postRoll(rzut, dane)
+                utrudnienia: utrudnienia,
+              };
+              this.postRoll(rzut, dane);
             }
           },
         },
@@ -57,14 +57,14 @@ export default class hellsingRoll {
       system: dialogData,
     }).render(true);
   }
-  async rzutObronny(obronnyNazwa, actor){
+  async rzutObronny(obronnyNazwa, actor) {
     const iloscKosci = actor.system.obronne[obronnyNazwa].value;
-    const rzut = new Roll(`${iloscKosci}d6`)
+    const rzut = new Roll(`${iloscKosci}d6`);
     const dane = {
-        type: "obronny",
-        nazwa: obronnyNazwa.toUpperCase()
+      type: "obronny",
+      nazwa: obronnyNazwa.toUpperCase(),
     };
-    this.postRoll(rzut, dane)
+    this.postRoll(rzut, dane);
   }
 
   async prepareAspekty(actor) {
@@ -78,65 +78,62 @@ export default class hellsingRoll {
     const sprzet = itemsArray.filter((item) => item.type === "sprzet");
     return sprzet;
   }
-  async postRoll(rzut, dane){
-    const wynik = await rzut.evaluate()
-    const ranny = this.actor.system?.ranny;
+  async postRoll(rzut, dane) {
+    const wynik = await rzut.evaluate();
+    const ranny = Object.values(this.actor.system?.rany).some(
+      (rana) => rana?.value !== "",
+    );
     let prógPecha = 1;
-    if(ranny !== undefined){
-        prógPecha = 2;
+    if (ranny) {
+      prógPecha = 2;
     }
-    const kostki = wynik.dice[0].results
+    const kostki = wynik.dice[0].results;
     let pech = 0;
     let sukcesy = 0;
     const iloscKostek = kostki.length;
-    kostki.forEach(kostka => {
-        if(kostka.result >= 5){
-            sukcesy ++;
-        }
-        if(kostka.result <= prógPecha){
-            pech ++;
-        }
+    kostki.forEach((kostka) => {
+      if (kostka.result >= 5) {
+        sukcesy++;
+      }
+      if (kostka.result <= prógPecha) {
+        pech++;
+      }
     });
     const html = await agenci_Utility.renderTemplate(
       "systems/agencja-hellsing/templates/chat/roll.hbs",
-      {formula: wynik.formula, 
-        kostki: kostki,
-        ranny: ranny
-      },
+      { formula: wynik.formula, kostki: kostki, ranny: ranny },
     );
     let type = "";
-    if(dane.type === "skill"){
-      type = "umiejętności"
+    if (dane.type === "skill") {
+      type = "umiejętności";
+    } else {
+      type = "rzutu obronnego";
     }
-    else{
-      type = "rzutu obronnego"
+    let flavor = `<h3 class="chat-heder">Test ${type} ${dane.nazwa}</h3><div class="hellsing-roll data-action="expandRoll">`;
+    if (sukcesy === 0) {
+      flavor += "NIe zdobyto żadnego sukcesu";
     }
-    let flavor = `<h3 class="chat-heder">Test ${type} ${dane.nazwa}</h3><div class="hellsing-roll data-action="expandRoll">`
-    if(sukcesy === 0){
-     flavor += "NIe zdobyto żadnego sukcesu";
+    if (sukcesy !== 0) {
+      flavor += `Zdobyta liczba sukswsów to: <strong>${sukcesy}</strong> `;
     }
-    if(sukcesy !== 0){
-     flavor += `Zdobyta liczba sukswsów to: <strong>${sukcesy}</strong> `
-    };
-    if(pech > Math.floor(iloscKostek/2)){
-        flavor += "Masz <strong>PECHA</strong>!"
+    if (pech > Math.floor(iloscKostek / 2)) {
+      flavor += "Masz <strong>PECHA</strong>!";
     }
-    let speaker = ChatMessage.getSpeaker({ actor: game.user.character })
-     if(game.user.isGM){
-         speaker = ChatMessage.getSpeaker({ actor: this.actor })
-     }
-     flavor += `</div>`
-     const titleHTML = `<h3>Test ${dane.nazwa}</h3>`
+    let speaker = ChatMessage.getSpeaker({ actor: game.user.character });
+    if (game.user.isGM) {
+      speaker = ChatMessage.getSpeaker({ actor: this.actor });
+    }
+    flavor += `</div>`;
+    const titleHTML = `<h3>Test ${dane.nazwa}</h3>`;
     const chatData = {
-                title: titleHTML,
-                user: game.user?._id,
-                speaker: speaker,
-                flavor: flavor,
-                content: html,
-                roll: wynik
-            };
-  
+      title: titleHTML,
+      user: game.user?._id,
+      speaker: speaker,
+      flavor: flavor,
+      content: html,
+      roll: wynik,
+    };
+
     await ChatMessage.create(chatData);
   }
-
 }

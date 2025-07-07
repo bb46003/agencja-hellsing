@@ -80,41 +80,79 @@ export const OBRONNE = Object.freeze({
 });
 
 export const WITALNOSC_MOC_DMG = Object.freeze({
-  value:{
+  value: {
     id: "pz",
     label: "Intuicja",
     sheetOrder: 1,
     nodeId: 1,
   },
-  regeneracja:{
+  regeneracja: {
     id: "reg",
     label: "Regeneracja",
     sheetOrder: 2,
     nodeId: 2,
   },
-  obrazenia:{
+  obrazenia: {
     id: "dmg",
     label: "Obrażenia",
     sheetOrder: 3,
     nodeId: 3,
   },
-    obrazenia_temp:{
+  obrazenia_temp: {
     id: "dmg_temp",
     label: "Obrażenia Tymczasowe",
     sheetOrder: 4,
     nodeId: 4,
   },
-  moc:{
-      id: "moc",
+  moc: {
+    id: "moc",
     label: "Moc",
     sheetOrder: 5,
     nodeId: 5,
   },
-  zuzyta_moc:{
-      id: "moc_wyk",
+  zuzyta_moc: {
+    id: "moc_wyk",
     label: "Zurzywa Moc",
     sheetOrder: 5,
     nodeId: 5,
-  }
+  },
+});
 
-})
+export const RANY = Object.freeze({
+  lekka1: {
+    id: "lekka1",
+    label: "Lekka1",
+    sheetOrder: 1,
+    nodeId: 1,
+  },
+  lekka2: {
+    id: "lekka2",
+    label: "Lekka2",
+    sheetOrder: 2,
+    nodeId: 2,
+  },
+  lekka3: {
+    id: "lekka3",
+    label: "Lekka3",
+    sheetOrder: 3,
+    nodeId: 3,
+  },
+  ciezka1: {
+    id: "ciezka1",
+    label: "Ciężka1",
+    sheetOrder: 4,
+    nodeId: 4,
+  },
+  ciezka2: {
+    id: "ciezka2",
+    label: "Ciężka3",
+    sheetOrder: 5,
+    nodeId: 5,
+  },
+  ciezka3: {
+    id: "ciezka3",
+    label: "Ciężka3",
+    sheetOrder: 6,
+    nodeId: 6,
+  },
+});

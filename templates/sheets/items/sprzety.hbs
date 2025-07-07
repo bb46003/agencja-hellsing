@@ -1,0 +1,70 @@
+<section class="sprzety">
+    <div class="tagi-section">
+        <div class="tagi-top">
+            <h3 class="item-tagi">TAGI</h3>
+            <i class="fa fa-plus" data-action="dodajtag" data-tooltip="Kliknij aby dodać tag"></i>
+        </div>
+        {{#each system.tagi as |tag index|}}
+            <div class="single-tag">
+                <input type="text" class="tag-input" name="{{index}}" value="{{lookup ../system.tagi index}}" placeholder="Wpisz nazwę Tagu">
+                <i class="fa-regular fa-trash-can" data-action="usuntag" data-index="{{index}}"></i>
+            </div>            
+        {{/each}}
+    </div>
+    <div class="akcje">
+        <label class="akcje-label">TYP AKCJI</label>
+        <label class="akcje-label">ZASIEG</label>
+        <select class="typ-akcji"name="system.akcja"> 
+            <option value="0" > CIĘCIE</option>
+            <option value="1" > PCHNIĘCIE</option>
+            <option value="2" > UDERZENIE</option>
+            <option value="3" > STRZAŁ</option>
+        </select>
+        <input name="system.zasieg" type="number" placeholder="Ppozostaw puste jak nie ma zasięgu">
+    </div>
+    <div class="efekty">
+        <div class="tagi-top">
+            <h3 class="item-tagi">EFEKTY</h3>
+            <i class="fa fa-plus" data-action="dodajefekt" data-tooltip="Kliknij aby dodać efekt"></i>
+        </div>
+        <div class="wszystkie-efekty">
+            {{#each system.efekt as |efekt index|}}
+                <div class="efekt">
+                <div class="koszt">
+                    <select class="typ-kosztu" name="{{index}}">
+                         <option value="-" {{#if (eq efekt.typkosztu "-")}}selected{{/if}}>-</option>
+                        <option value="S" {{#if (eq efekt.typkosztu "S")}}selected{{/if}}>S</option>
+                        <option value="S+P" {{#if (eq efekt.typkosztu "S+P")}}selected{{/if}}>S oraz P</option>
+                        <option value="M" {{#if (eq efekt.typkosztu "M")}}selected{{/if}}>M</option>
+                    </select>
+                    {{#if (eq efekt.typkosztu "S+P")}}
+                        <div class="koszt S-P">
+                            <label class="akcje-label">KOSZT SUKCESÓW</label>
+                            <input type="text" name="system.efekt.{{index}}.koszt.S" value="{{efekt.koszt.S}}" placeholder="np. 1/2">
+                            <label class="akcje-label">KOSZT PRZEWAG</label>
+                            <input type="text" name="system.efekt.{{index}}.koszt.P" value="{{efekt.koszt.P}}" placeholder="np. 1/2">
+                        </div>
+                    {{/if}}
+                    {{#if (eq efekt.typkosztu "S")}}
+                        <div class="koszt">
+                            <label class="akcje-label">KOSZT SUKCESÓW</label>
+                            <input type="text" name="system.efekt.{{index}}.koszt.S" value="{{efekt.koszt.S}}" placeholder="np. 1/2">
+                        </div>
+                    {{/if}}
+                    {{#if (eq efekt.typkosztu "M")}}
+                        <div class="koszt">
+                            <label class="akcje-label">KOSZT MOCY</label>
+                            <input type="text" name="system.efekt.{{index}}.koszt.M" value="{{efekt.koszt.M}}" placeholder="np. 1/2">
+                        </div>
+                    {{/if}}
+                </div>
+                <div class="opis">
+                    <label class="akcje-label">OPIS</label>
+                    <textarea name="system.efekt.{{index}}.opis">{{efekt.opis}}</textarea>
+                </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+</section>

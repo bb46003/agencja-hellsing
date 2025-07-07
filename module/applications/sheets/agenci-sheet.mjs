@@ -11,12 +11,12 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     tag: "form",
     position: {
       width: 820,
-      height: 'auto',
+      height: "auto",
     },
     actions: {
       skillRoll: AgenciActorSheet.#onskillRoll,
       setSkillValue: AgenciActorSheet.#setSkillValue,
-      deffRoll: AgenciActorSheet.#onRzutObronny
+      deffRoll: AgenciActorSheet.#onRzutObronny,
     },
     form: {
       submitOnChange: true,
@@ -28,7 +28,6 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
 
   /** @override */
   static PARTS = {
- 
     sidebar: {
       id: "sidebar",
       template: "systems/agencja-hellsing/templates/sheets/actor/sidebar.hbs",
@@ -44,16 +43,16 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     },
     aspekty_talenty: {
       id: "aspekty_talenty",
-      template:"systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
-    }
-    
+      template:
+        "systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
+    },
   };
 
   /** At least one tab is required to avoid rendering errors */
   static TABS = {
     sheet: [
-      { id: "cechy_glowne",  group: "sheet"},
-      { id: "aspekty_talenty",  group: "sheet"}
+      { id: "cechy_glowne", group: "sheet" },
+      { id: "aspekty_talenty", group: "sheet" },
     ],
   };
 
@@ -118,10 +117,12 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     const selektorCech = html.querySelectorAll(".selector-cech");
     this.zmianaCechy(html);
     selektorCech.forEach((cecha) => {
-      cecha.addEventListener("change", (ev) => this.actor.zmianaDodatkowychCech(ev));
+      cecha.addEventListener("change", (ev) =>
+        this.actor.zmianaDodatkowychCech(ev),
+      );
     });
   }
- 
+
   async render(force = false, options = {}) {
     await super.render(force, options);
     const el = this.element;
@@ -156,9 +157,9 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     const actor = this.actor;
     actor.setSkillValue(cecha, skillKey, skillValue);
   }
-  static async #onRzutObronny(event){
+  static async #onRzutObronny(event) {
     const obronnyNazwa = event.target.dataset.obronny;
-    return this.actor.rzutObronny(obronnyNazwa)
+    return this.actor.rzutObronny(obronnyNazwa);
   }
   async zmianaCechy(html) {
     const inneCechy = html.querySelectorAll(".selector-cech");
@@ -188,7 +189,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
         if (optVal === 0) {
           option.style.display = "";
         } else if (optVal === currentValue) {
-          option.style.display = ""; 
+          option.style.display = "";
         } else {
           const left = availableValues[optVal] || 0;
           if (left <= 0) {
@@ -198,6 +199,4 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       });
     });
   }
-
-  
 }
