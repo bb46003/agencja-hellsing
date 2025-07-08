@@ -303,3 +303,80 @@ h3.heder-sidebar {
 input[type="number"] {
   text-align: center;
 }
+
+
+.efekt {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #999;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+.application.sheet.hellsing.item.standard-form .window-content{
+  overflow-y: visible;
+}
+
+.nazwa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nazwa label {
+  text-align: center;
+  font-weight: bold;
+}
+.nazwa input {
+  text-align: center;
+  width: 100%;
+}
+
+.koszt-typy {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.typ-kosztu-sekcja {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.typ-kosztu-sekcja label {
+  font-weight: bold;
+}
+.typ-kosztu-sekcja select {
+  width: 100%;
+}
+.nazwa-szczegoly{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.koszt-wartosci {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+.koszt-wartosci label {
+  margin-top: 0.5rem;
+}
+.koszt-wartosci input {
+  width: 100%;
+}
+
+/* Wiersz 3: OPIS */
+.opis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.opis label {
+  text-align: center;
+  font-weight: bold;
+}
+.opis textarea {
+  width: 100%;
+  height: 80px;
+  resize: none;
+}

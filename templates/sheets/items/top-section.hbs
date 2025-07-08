@@ -1,10 +1,6 @@
 <section class="top-section">
   <div class="item-info">
-    <img src="{{item.img}}" alt="{{item.name}}" class="item-image" />
-    <h2 class="item-name"><input
-        type="text"
-        value="{{item.name}}"
-        name="name"
-      /></h2>
+    <img src="{{item.img}}" alt="{{item.name}}" class="item-image" data-action="editImage" data-edit="img"/>
+    <h2 class="item-name">{{formInput item.schema.fields.name value=source.name placeholder="Item Name"}}</h2>
   </div>
 </section>

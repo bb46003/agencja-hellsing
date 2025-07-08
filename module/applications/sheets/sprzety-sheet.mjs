@@ -8,12 +8,18 @@ export default class ItemsSprzety extends api.HandlebarsApplicationMixin(
     tag: "form",
     position: {
       width: 560,
-      height: "auto",
+      height: 695
+    },
+    form: {
+       handler: ItemsSprzety.myFormHandler,
+      submitOnChange: true,
     },
     actions: {
       dodajtag: ItemsSprzety.#dodajTag,
       usuntag: ItemsSprzety.#usunTag,
       dodajefekt: ItemsSprzety.#dodajEfekt,
+      ukryj: ItemsSprzety.#ukryjDetale,
+      usunefekt: ItemsSprzety.#usunefekt
     },
     item: {
       type: "sprzet",
@@ -33,7 +39,9 @@ export default class ItemsSprzety extends api.HandlebarsApplicationMixin(
   static TABS = {
     sheet: [],
   };
-
+  static async myFormHandler(event, form, formData) {
+    console.log(event, form, formData)
+  }
   async _prepareContext(options) {
     const itemData = await this.getData();
     return itemData;
@@ -90,6 +98,9 @@ export default class ItemsSprzety extends api.HandlebarsApplicationMixin(
 
     return context;
   }
+  async _updateObject(event, formData) {
+  await this.document.update(formData);
+}
   static async #dodajTag() {
     await this.item.dodajTag();
   }
@@ -100,11 +111,22 @@ export default class ItemsSprzety extends api.HandlebarsApplicationMixin(
   static async #dodajEfekt(){
      await this.item.dodajEfekt();
   }
+ static async #ukryjDetale(event) {
+  const efektID = event.target.dataset.index
+   await this.item.ukryjDetale(efektID)
+}
 
-  async render(force = false, options = {}) {
+static async #usunefekt(event){
+  const efektID = Number(event.target.dataset.index);
+  await this.item.usunEfekt(efektID)
+}
+
+async render(force = false, options = {}) {
     await super.render(force, options);
     const el = this.element;
     this.activateListeners(el);
+   
+
   }
 
   async activateListeners(html) {
@@ -115,9 +137,10 @@ export default class ItemsSprzety extends api.HandlebarsApplicationMixin(
       );
     });
     const typKosztu = html.querySelectorAll(".typ-kosztu");
-    typKosztu.forEach((selection)=>{
+  typKosztu.forEach((selection)=>{
       selection.addEventListener("change",(ev)=>
-        this.item.zmianaKosztu(ev))
+       this.item.zmianaKosztu(ev)
+      )
     })
   }
 }

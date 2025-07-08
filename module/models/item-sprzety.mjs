@@ -26,6 +26,8 @@ export default class ItemSprzetyDataModel extends foundry.abstract
             M: new fields.StringField({ pattern: fractionPattern }),
           }),
           opis: new fields.StringField(),
+          nazwa: new fields.StringField(),
+          collapse: new fields.BooleanField({ initial: false })
         }),
       ),
     };

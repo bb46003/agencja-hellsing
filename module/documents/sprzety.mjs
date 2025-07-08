@@ -41,21 +41,41 @@ export default class SPRZETY extends foundry.documents.Item {
       S: "",
       M: ""
     },
-    opis: ""
+    opis: "",
+    nazwa:"",
+    collapse: true,
   };
 
   await this.update({
     "system.efekt": [...current, nowyEfekt]
   });
+    this.sheet.render(true)
+}
+async usunEfekt(efektID){
+  const current = this.system.efekt ?? [];
+  const updated = current.filter((_, index) => index !== efektID);
+  await this.update({ "system.efekt": updated });
+
 }
 async zmianaKosztu(ev){
     const newValue = ev.target.value;
-    const name = ev.target.name;
+    const name = ev.target.dataset.index;
     const index = Number(name);
     const efekty = [...this.system.efekt];
     efekty[index].typkosztu = newValue;
     await this.update({ "system.efekty": efekty });
     this.sheet.render(true)
 
+}
+async ukryjDetale(efektID){
+  const efekty = [...this.system.efekt];
+ const index = Number(efektID);
+  if(this.system.efekt[index].collapse){
+    efekty[index].collapse = false;
+  }else{
+    efekty[index].collapse = true;
+  }
+   await this.update({ "system.efekty": efekty });
+   this.sheet.render(true)
 }
 }
