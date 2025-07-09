@@ -44,8 +44,6 @@ export default class AgenciDataModel extends foundry.abstract.TypeDataModel {
           },
           {},
         );
-
-        // Add value and skills to this cecha
         obj[cecha.id] = new fields.SchemaField(
           {
             value: new fields.NumberField({

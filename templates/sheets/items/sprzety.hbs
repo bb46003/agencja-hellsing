@@ -6,7 +6,7 @@
         </div>
         {{#each system.tagi as |tag index|}}
             <div class="single-tag">
-                <input type="text" class="tag-input" name="{{index}}" value="{{lookup ../system.tagi index}}" placeholder="Wpisz nazwę Tagu">
+                <input type="text" class="tag-input" data-name="{{index}}" data-element = "tagi" value="{{lookup ../system.tagi index}}" placeholder="Wpisz nazwę Tagu">
                 <i class="fa-regular fa-trash-can" data-action="usuntag" data-index="{{index}}"></i>
             </div>            
         {{/each}}
@@ -14,13 +14,14 @@
     <div class="akcje">
         <label class="akcje-label">TYP AKCJI</label>
         <label class="akcje-label">ZASIEG</label>
-        <select class="typ-akcji"name="system.akcja"> 
-            <option value="0" > CIĘCIE</option>
-            <option value="1" > PCHNIĘCIE</option>
-            <option value="2" > UDERZENIE</option>
-            <option value="3" > STRZAŁ</option>
+        <select class="typ-akcji" data-name="akcja"  data-element = "akcja"> 
+            <option value="0" {{#if (eq system.akcja 0)}}selected{{/if}}> -</option>
+            <option value="1" {{#if (eq system.akcja 1)}}selected{{/if}}> CIĘCIE</option>
+            <option value="2" {{#if (eq system.akcja 2)}}selected{{/if}}> PCHNIĘCIE</option>
+            <option value="3"{{#if (eq system.akcja 3)}}selected{{/if}} > UDERZENIE</option>
+            <option value="4"{{#if (eq system.akcja 4)}}selected{{/if}} > STRZAŁ</option>
         </select>
-        <input name="system.zasieg" type="number" placeholder="Ppozostaw puste jak nie ma zasięgu">
+        <input data-name="zasieg"  data-element = "zasieg" type="text"  value="{{system.zasieg}}" placeholder="Pozostaw puste jak nie ma zasięgu">
     </div>
     <div class="efekty">
         <div class="tagi-top">
@@ -32,15 +33,15 @@
                 <div class="efekt">
                     <div class="nazwa">
                         <div class="nazwa-szczegoly">
-                            <label class="akcje-label" data-action="ukryj" data-index="{{index}}" data-tooltip="Kliknij aby zobaczyć szczegóły">NAZWA</label>
+                            <label class="akcje-label" data-element = "efekt" data-action="ukryj" data-index="{{index}}" {{#if efekt.collapse}}data-tooltip="Kliknij aby schować szczegóły"{{else}} data-tooltip="Kliknij aby zobaczyć szczegóły"{{/if}}>NAZWA</label>
                             <i class="fa-regular fa-trash-can" data-action="usunefekt" data-index="{{index}}"></i>
                         </div>                     
-                        <input type="text" data-name="system.efekt.{{index}}.nazwa" value="{{efekt.nazwa}}">
+                        <input type="text" data-element = "efekt" data-name="nazwa" data-index="{{index}}" value="{{efekt.nazwa}}">
                 </div>
                 {{#if efekt.collapse}}                    
                 <div class="koszt">
                     <label class="akcje-label">TYP KOSZTU</label>
-                    <select class="typ-kosztu" data-index = "{{index}}">
+                    <select class="typ-kosztu" data-index = "{{index}}" data-name="typkosztu" data-element = "efekt">
                          <option value="-" {{#if (eq efekt.typkosztu "-")}}selected{{/if}}>-</option>
                         <option value="S" {{#if (eq efekt.typkosztu "S")}}selected{{/if}}>S</option>
                         <option value="S+P" {{#if (eq efekt.typkosztu "S+P")}}selected{{/if}}>S oraz P</option>
@@ -49,27 +50,27 @@
                     {{#if (eq efekt.typkosztu "S+P")}}
                         <div class="koszt S-P">
                             <label class="akcje-label">KOSZT SUKCESÓW</label>
-                            <input type="text" data-name="system.efekt.{{index}}.koszt.S" value="{{efekt.koszt.S}}" placeholder="np. 1/2">
+                            <input type="text" data-name="koszt" data-type="S" data-index="{{index}}" data-element = "efekt" value="{{efekt.koszt.S}}" placeholder="np. 1, 2 lub 1/2">
                             <label class="akcje-label">KOSZT PRZEWAG</label>
-                            <input type="text" data-name="system.efekt.{{index}}.koszt.P" value="{{efekt.koszt.P}}" placeholder="np. 1/2">
+                            <input type="text" data-name="koszt" data-type="P" data-index="{{index}}" data-element = "efekt" value="{{efekt.koszt.P}}" placeholder="np. 1, 2 lub  1/2">
                         </div>
                     {{/if}}
                     {{#if (eq efekt.typkosztu "S")}}
                         <div class="koszt S">
                             <label class="akcje-label">KOSZT SUKCESÓW</label>
-                            <input type="text" data-name="system.efekt.{{index}}.koszt.S" value="{{efekt.koszt.S}}" placeholder="np. 1/2">
+                            <input type="text" data-name="koszt" data-type="S" data-index="{{index}}" data-element = "efekt"  value="{{efekt.koszt.S}}" placeholder="np. 1/2">
                         </div>
                     {{/if}}
                     {{#if (eq efekt.typkosztu "M")}}
                         <div class="koszt M">
                             <label class="akcje-label">KOSZT MOCY</label>
-                            <input type="text" data-name="system.efekt.{{index}}.koszt.M" value="{{efekt.koszt.M}}" placeholder="np. 1/2">
+                            <input type="text" data-name="koszt" data-type="M" data-index="{{index}}" data-element = "efekt" value="{{efekt.koszt.M}}" placeholder="np. 1/2">
                         </div>
                     {{/if}}
                 </div>
                 <div class="opis">
                     <label class="akcje-label">OPIS</label>
-                    <textarea data-name="system.efekt.{{index}}.opis">{{efekt.opis}}</textarea>
+                    <textarea data-name="opis" data-index="{{index}}" data-element = "efekt">{{efekt.opis}}</textarea>
                 </div>
                
                 {{/if}}

@@ -130,4 +130,35 @@ export default class AgenciActor extends Actor {
         break;
     }
   }
+
+  async dodajPRzedmiot(itemData){
+         await this.createEmbeddedDocuments("Item", [itemData]);
+        await this.update();
+  }
+  async usunPrzedmiot(itemID){
+    const item = this.items.get(itemID)
+    const dialog = await new foundry.applications.api.DialogV2({
+      window: { title: `Czy chcesz usunąć sprzęt` },
+      content: `
+            Czy na pewno chcesz usunąc sprzęt ${item.name}?
+          `,
+      buttons: [
+        {
+          action: "delete",
+          label: "Usuń"
+        },
+        {
+          action: "cancel",
+          label: "Anuluj",
+          default: true   
+      }],
+      submit: (result) => {
+          if (result === "delete") {
+            this.deleteEmbeddedDocuments("Item", [itemID]);
+          }
+        }
+      })     
+    dialog.render(true);
+  }
+  
 }

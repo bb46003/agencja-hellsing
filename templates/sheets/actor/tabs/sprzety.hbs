@@ -1,0 +1,35 @@
+<section
+  class="tab sprzety {{tabs.sprzety.cssClass}}"
+  action-data="tab"
+  data-group="sheet"
+  data-tab="sprzety"
+>
+<div class="sprzety-item">
+    <div class="sprzet-heder">
+        <h3 class="heder-tabs">TWOJE SPRZĘTY</h3>
+        <i class="fa fa-plus" data-action="dodajnowysprzet" data-tooltip="Dodaj nowy sprzet"></i>
+    </div>
+    <div class="sprzet-tabela">
+        <div class="sprzęty-naglowek">
+            <h4 class="heder-tabs">NAZWA</h4>
+            <h4 class="heder-tabs">TAGI</h4>
+        </div>
+        {{#each items as |sprzety|}}
+            {{#if (eq sprzety.type  "sprzet")}}
+            {{log sprzety}}
+            <div class="sprzet-item">
+                <div class="sprzet-label">
+                    <label  id="{{sprzety._id}}" data-action="otworzsprzet" data-tooltip="Kliknij aby edytować sprzęt">{{sprzety.name}}</label>
+                    <i class="fa-regular fa-trash-can" data-action="usunprzedmiot" id="{{sprzety._id}}"></i>
+                </div>
+                <div class="tagi">
+                    {{#each sprzety.system.tagi as |tag|}}
+                        <label class="tagi-label">{{tag}}</label>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+        {{/each}}
+    </div>
+</div>
+</section>

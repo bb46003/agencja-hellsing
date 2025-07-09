@@ -12,19 +12,21 @@ export default class SPRZETY extends foundry.documents.Item {
   get tagi() {
     return this.system.tagi;
   }
-
+  get efekty(){
+    return this.system.efekt;
+  }
   async dodajTag() {
     const tagi = this.system.tagi ?? [];
     const nowaLista = [...tagi, ""];
     await this.update({ "system.tagi": nowaLista });
   }
-  async zmianaTagu(ev, item) {
+  async zmianaTagu(ev) {
     const newValue = ev.target.value;
-    const name = ev.target.name;
+    const name = ev.target.dataset.name;
     const index = Number(name);
-    const tagi = [...item.system.tagi];
+    const tagi = [...this.system.tagi];
     tagi[index] = newValue;
-    await item.update({ "system.tagi": tagi });
+    await this.update({ "system.tagi": tagi });
   }
   async usunTag(tagIndex, item) {
     const tagi = [...item.system.tagi];
@@ -57,15 +59,30 @@ async usunEfekt(efektID){
   await this.update({ "system.efekt": updated });
 
 }
-async zmianaKosztu(ev){
-    const newValue = ev.target.value;
-    const name = ev.target.dataset.index;
-    const index = Number(name);
-    const efekty = [...this.system.efekt];
-    efekty[index].typkosztu = newValue;
-    await this.update({ "system.efekty": efekty });
-    this.sheet.render(true)
 
+async zmianaDanych(event,name,index, name2, element){
+   const newValue = event.target.value;
+  switch(element){
+    case "efekt":
+      const efekty = [...this.system.efekt];     
+      if(name !== "koszt"){
+        efekty[index][name] = newValue;
+      }else{
+        efekty[index][name][name2] = newValue;
+      }    
+      await this.update({ "system.efekt": efekty });
+    break;
+    case "tagi":
+      await this.zmianaTagu(event)
+    break;
+    case "akcja":
+      await this.update({['system.akcja']:Number(newValue)})
+    break;
+    case "zasieg":
+            await this.update({['system.zasieg']:newValue})
+    break;
+  }
+   this.sheet.render(true)
 }
 async ukryjDetale(efektID){
   const efekty = [...this.system.efekt];
@@ -75,7 +92,7 @@ async ukryjDetale(efektID){
   }else{
     efekty[index].collapse = true;
   }
-   await this.update({ "system.efekty": efekty });
+   await this.update({ "system.efekt": efekty });
    this.sheet.render(true)
 }
 }

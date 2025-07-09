@@ -380,3 +380,43 @@ input[type="number"] {
   height: 80px;
   resize: none;
 }
+.sprzet-heder{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: solid;
+    margin-bottom: 25px;
+    padding: 10px;
+}
+.sprzet-heder .heder-tabs{
+  width: auto;
+}
+.sprzet-tabela{
+  display: grid;
+}
+.sprzęty-naglowek {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+ 
+}
+
+.sprzęty-naglowek > * {
+  border: 1px solid gray; /* inner borders between grid cells */
+  padding: 5px; /* optional: spacing inside cells */
+  box-sizing: border-box; /* ensures padding doesn't break layout */
+}
+.sprzet-item{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    flex-direction: row;
+}
+.sprzet-label, .tagi{
+  text-align: center;
+  border: 1px solid gray;
+}
+.tab.sprzety{
+      width: 93%;
+    margin: 0 10px 0 10px;
+    
+}

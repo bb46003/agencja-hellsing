@@ -47,6 +47,7 @@ async function preloadHandlebarsTemplates() {
       "systems/agencja-hellsing/templates/sheets/actor/tabs.hbs",
       "systems/agencja-hellsing/templates/sheets/actor/tabs/cechy-umiejetnosci.hbs",
       "systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
+      "systems/agencja-hellsing/templates/sheets/actor/tabs/sprzety.hbs"
     ]);
   } else {
     foundry.applications.handlebars.loadTemplates([
@@ -54,6 +55,7 @@ async function preloadHandlebarsTemplates() {
       "systems/agencja-hellsing/templates/sheets/actor/tabs.hbs",
       "systems/agencja-hellsing/templates/sheets/actor/tabs/cechy-umiejetnosci.hbs",
       "systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
+      "systems/agencja-hellsing/templates/sheets/actor/tabs/sprzety.hbs"
     ]);
   }
 }

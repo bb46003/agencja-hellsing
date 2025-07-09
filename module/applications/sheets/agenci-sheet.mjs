@@ -17,6 +17,8 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       skillRoll: AgenciActorSheet.#onskillRoll,
       setSkillValue: AgenciActorSheet.#setSkillValue,
       deffRoll: AgenciActorSheet.#onRzutObronny,
+      otworzsprzet: AgenciActorSheet.#otworzPrzedmiot,
+      usunprzedmiot: AgenciActorSheet.#usunPrzedmiot,
     },
     form: {
       submitOnChange: true,
@@ -46,6 +48,11 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       template:
         "systems/agencja-hellsing/templates/sheets/actor/tabs/aspekty_talenty.hbs",
     },
+    sprzety: {
+      id: "sprzety",
+      template:
+        "systems/agencja-hellsing/templates/sheets/actor/tabs/sprzety.hbs",
+    },
   };
 
   /** At least one tab is required to avoid rendering errors */
@@ -53,6 +60,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     sheet: [
       { id: "cechy_glowne", group: "sheet" },
       { id: "aspekty_talenty", group: "sheet" },
+       { id: "sprzety", group: "sheet" },
     ],
   };
 
@@ -161,6 +169,18 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     const obronnyNazwa = event.target.dataset.obronny;
     return this.actor.rzutObronny(obronnyNazwa);
   }
+  static async #otworzPrzedmiot(event){
+    const target = event.target;
+    const itemTD = target.id;
+    const actor = this.actor.uuid;
+    const item = await fromUuid(actor+".Item."+itemTD);
+    item.sheet.render(true)
+  }
+  static async #usunPrzedmiot(event){
+    const target = event.target;
+    const itemTD = target.id;
+    await this.actor.usunPrzedmiot(itemTD)
+  }
   async zmianaCechy(html) {
     const inneCechy = html.querySelectorAll(".selector-cech");
     const cechaPool = [1, 2, 2, 3];
@@ -198,5 +218,27 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
         }
       });
     });
+  }
+ async _onDragOver(event) {
+    event.preventDefault();
+    event.currentTarget.classList.add("drag-over");
+  }
+  async _onDragLeave(event) {
+    event.currentTarget.classList.remove("drag-over");
+  }
+  async _onDrop(event) {
+    event.preventDefault();
+    const data = event.dataTransfer;
+    if (data) {
+      const droppedItem = JSON.parse(data.getData("text/plain"));
+      const droppedType = droppedItem.type;
+      if (droppedType === "Item") {
+        const itemUUID = droppedItem.uuid;
+        const item = await fromUuid(itemUUID);
+        const itemData = item.toObject();
+        await this.actor.dodajPRzedmiot(itemData);
+   
+      }
+    }
   }
 }
