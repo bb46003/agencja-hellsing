@@ -5,30 +5,38 @@
 
 {{#if (notEmpty aspekty)}}
   <label>Aspekty:</label>
-  <ul>
+  <ul class="roll-tagi">
     {{#each aspekty}}
-      <li>
+      <li >
         <strong>{{this.name}}</strong>:
-        {{#if (isArray this.tag)}}{{join
-            this.tag
-            ", "
-          }}{{else}}{{this.tag}}{{/if}}
-      </li>
+        <div class="roll-tag">
+        {{#each this.tagi as |tag|}}
+        <div class="single-tag">
+          <label>{{tag}}</label>
+          <input type="checkbox" id="{{tag}}">
+        </div>
+          
+        {{/each}}
+        </div>
     {{/each}}
   </ul>
 {{/if}}
-
+{{log sprzet}}
 {{#if (notEmpty sprzet)}}
   <label>Sprzęt:</label>
-  <ul>
+  <ul class="roll-tagi">
     {{#each sprzet}}
-      <li>
-        <strong>{{this.name}}</strong>:
-        {{#if (isArray this.tag)}}{{join
-            this.tag
-            ", "
-          }}{{else}}{{this.tag}}{{/if}}
-      </li>
+      <li >
+        <strong>{{this.name}} TAGI:</strong>:
+        <div class="roll-tag">
+        {{#each this.tagi as |tag|}}
+        <div class="single-tag">
+          <label>{{tag}}</label>
+          <input type="checkbox" id="{{tag}}">
+        </div>
+          
+        {{/each}}
+        </div>
     {{/each}}
   </ul>
 {{/if}}

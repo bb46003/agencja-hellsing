@@ -131,9 +131,15 @@ export default class AgenciActor extends Actor {
     }
   }
 
-  async dodajPRzedmiot(itemData){
-         await this.createEmbeddedDocuments("Item", [itemData]);
+  async dodajPrzedmiot(itemData){
+       const createdItems = await this.createEmbeddedDocuments("Item", [itemData]);
         await this.update();
+        if(itemData.name === "Nowy Sprzęt"){
+          if (createdItems.length > 0) {
+            const createdItem = createdItems[0];
+            createdItem.sheet.render(true);
+          }
+        }
   }
   async usunPrzedmiot(itemID){
     const item = this.items.get(itemID)

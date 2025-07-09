@@ -40,14 +40,23 @@ export default class ItemsSprzety extends api.HandlebarsApplicationMixin(
     sheet: [],
   };
   static async myFormHandler(event, form, formData) {
-    const name = event.target.dataset.name;
-    const element = event.target.dataset.element;
+    if(event.type !== "submit"){
+    let name = event.target.dataset.name;
+    let element = event.target.dataset.element;
+    if(element === undefined){
+      element = event.target.name;
+    }
     let name2 = ""
     if(name === "koszt"){
       name2 = event.target.dataset.type
     }
     const index = Number(event.target.dataset.index);
     await this.item.zmianaDanych(event, name, index, name2, element)
+  }
+  if(event.type === "submit"){
+    await this.item.update({['img']:formData.object.img})
+  }
+
   }
   async _prepareContext(options) {
     const itemData = await this.getData();

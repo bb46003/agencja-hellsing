@@ -415,8 +415,27 @@ input[type="number"] {
   text-align: center;
   border: 1px solid gray;
 }
+.sprzet-label{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .tab.sprzety{
       width: 93%;
     margin: 0 10px 0 10px;
     
+}
+.sprzety-image{
+      width: 30%;
+}
+.roll-tag{
+  display: flex
+;
+    flex-direction: row;
+}
+.roll-tagi{
+      max-height: 60px;
+    overflow: auto;
+    border: dashed 1px ;
+    margin: 0;
 }

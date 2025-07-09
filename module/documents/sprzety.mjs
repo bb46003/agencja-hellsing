@@ -81,6 +81,9 @@ async zmianaDanych(event,name,index, name2, element){
     case "zasieg":
             await this.update({['system.zasieg']:newValue})
     break;
+    case "name":
+        await this.update({['name']:newValue})
+    break
   }
    this.sheet.render(true)
 }

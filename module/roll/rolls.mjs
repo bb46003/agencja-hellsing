@@ -7,6 +7,7 @@ export default class hellsingRoll {
   async rollSkill(skillName, skillValue, actor) {
     const aspekty = await this.prepareAspekty(actor);
     const sprzet = await this.prepareSprzet(actor);
+    console.log(sprzet)
     const dialogData = {
       umiejtnosc: skillName,
       wartoscUmiejetnosci: skillValue,
@@ -68,13 +69,13 @@ export default class hellsingRoll {
   }
 
   async prepareAspekty(actor) {
-    const itemsArray = Object.values(actor.items);
+    const itemsArray = actor.items;
     const aspekty = itemsArray.filter((item) => item.type === "aspekt");
     return aspekty;
   }
 
   async prepareSprzet(actor) {
-    const itemsArray = Object.values(actor.items);
+    const itemsArray = actor.items;
     const sprzet = itemsArray.filter((item) => item.type === "sprzet");
     return sprzet;
   }

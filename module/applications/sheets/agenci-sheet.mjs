@@ -19,6 +19,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
       deffRoll: AgenciActorSheet.#onRzutObronny,
       otworzsprzet: AgenciActorSheet.#otworzPrzedmiot,
       usunprzedmiot: AgenciActorSheet.#usunPrzedmiot,
+      dodajnowysprzet: AgenciActorSheet.#dodajNowySprzet
     },
     form: {
       submitOnChange: true,
@@ -181,6 +182,11 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
     const itemTD = target.id;
     await this.actor.usunPrzedmiot(itemTD)
   }
+  static async #dodajNowySprzet(event){ 
+    const itemData = {type:"sprzet",name:"Nowy Sprzęt"}
+    await this.actor.dodajPrzedmiot(itemData);
+
+  }
   async zmianaCechy(html) {
     const inneCechy = html.querySelectorAll(".selector-cech");
     const cechaPool = [1, 2, 2, 3];
@@ -236,7 +242,7 @@ export default class AgenciActorSheet extends api.HandlebarsApplicationMixin(
         const itemUUID = droppedItem.uuid;
         const item = await fromUuid(itemUUID);
         const itemData = item.toObject();
-        await this.actor.dodajPRzedmiot(itemData);
+        await this.actor.dodajPrzedmiot(itemData);
    
       }
     }

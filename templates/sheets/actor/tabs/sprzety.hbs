@@ -16,9 +16,9 @@
         </div>
         {{#each items as |sprzety|}}
             {{#if (eq sprzety.type  "sprzet")}}
-            {{log sprzety}}
             <div class="sprzet-item">
                 <div class="sprzet-label">
+                     <img src="{{sprzety.img}}"  class="sprzety-image"/>
                     <label  id="{{sprzety._id}}" data-action="otworzsprzet" data-tooltip="Kliknij aby edytować sprzęt">{{sprzety.name}}</label>
                     <i class="fa-regular fa-trash-can" data-action="usunprzedmiot" id="{{sprzety._id}}"></i>
                 </div>
