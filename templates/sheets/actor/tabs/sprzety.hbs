@@ -12,7 +12,8 @@
     <div class="sprzet-tabela">
         <div class="sprzęty-naglowek">
             <h4 class="heder-tabs">NAZWA</h4>
-            <h4 class="heder-tabs">TAGI</h4>
+            <h4 class="heder-tabs">TAGI</h4>  
+            <h4 class="heder-tabs">AKCJE</h4>
         </div>
         {{#each items as |sprzety|}}
             {{#if (eq sprzety.type  "sprzet")}}
@@ -25,6 +26,15 @@
                 <div class="tagi">
                     {{#each sprzety.system.tagi as |tag|}}
                         <label class="tagi-label">{{tag}}</label>
+                    {{/each}}
+                </div>
+                    <div class="akcje-sprzet-agent">
+                    {{#each sprzety.system.efekt as |efekt|}}
+                    <div class="akcja">
+                        <label class="tagi-label">{{efekt.nazwa}}</label>
+                        {{#kosztAkcji efekt}}{{/kosztAkcji}}
+                        <label class="opis-label">{{efekt.opis}}</label>
+                    </div>
                     {{/each}}
                 </div>
             </div>

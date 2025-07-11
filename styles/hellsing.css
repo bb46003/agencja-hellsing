@@ -397,7 +397,7 @@ input[type="number"] {
 }
 .sprzęty-naglowek {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
  
 }
 
@@ -408,10 +408,9 @@ input[type="number"] {
 }
 .sprzet-item{
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    flex-direction: row;
+    grid-template-columns: 1fr 1fr 1fr;
 }
-.sprzet-label, .tagi{
+.sprzet-label, .tagi, .akcje-sprzet-agent{
   text-align: center;
   border: 1px solid gray;
 }
@@ -420,6 +419,14 @@ input[type="number"] {
   align-items: center;
   gap: 10px;
 }
+.akcja{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+.koszt-label{
+  display: flex;
+  gap: 5px;}
 .tab.sprzety{
       width: 93%;
     margin: 0 10px 0 10px;
@@ -429,13 +436,22 @@ input[type="number"] {
       width: 30%;
 }
 .roll-tag{
-  display: flex
-;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 .roll-tagi{
-      max-height: 60px;
+      max-height: 200px;
     overflow: auto;
     border: dashed 1px ;
     margin: 0;
+}
+.wybieranie-tagow {
+    max-height: 200px;
+
+}
+.wybieranie-tagow.dwa {
+    display: grid;
+    grid-template-columns: 1fr 1fr;    
+    gap: 10px;
+
 }

@@ -7,7 +7,6 @@ export default class hellsingRoll {
   async rollSkill(skillName, skillValue, actor) {
     const aspekty = await this.prepareAspekty(actor);
     const sprzet = await this.prepareSprzet(actor);
-    console.log(sprzet)
     const dialogData = {
       umiejtnosc: skillName,
       wartoscUmiejetnosci: skillValue,
@@ -20,39 +19,16 @@ export default class hellsingRoll {
     );
     const dialog = await new foundry.applications.api.DialogV2({
       window: { title: `Rzut na ${skillName}` },
+      position:{
+        width:400
+      },
       content: html,
       buttons: [
         {
           action: "rzut",
           label: "Rzut",
           default: true,
-          callback: async (event) => {
-            const baseNumberOfDice = Number(
-              dialog.options.system.wartoscUmiejetnosci,
-            );
-            const dialogHTML = event.currentTarget.lastChild;
-            const ulatwienia = Number(
-              dialogHTML.querySelector(".ulatwienia").value,
-            );
-            const utrudnienia = Number(
-              dialogHTML.querySelector(".utrudnienia").value,
-            );
-            const numberOfDice = baseNumberOfDice - utrudnienia + ulatwienia;
-            if (numberOfDice <= 0) {
-              //warning
-            } else {
-              const rzut = await new Roll(`${numberOfDice}d6`);
-              const dane = {
-                type: "skill",
-                nazwa: skillName.toUpperCase(),
-                aspekty: [],
-                sprzet: [],
-                ulatwienia: ulatwienia,
-                utrudnienia: utrudnienia,
-              };
-              this.postRoll(rzut, dane);
-            }
-          },
+          callback: async (event) => {this.preRoll(dialog, event)},
         },
       ],
       system: dialogData,
@@ -79,6 +55,53 @@ export default class hellsingRoll {
     const sprzet = itemsArray.filter((item) => item.type === "sprzet");
     return sprzet;
   }
+  async preRoll(dialog, event){
+            const baseNumberOfDice = Number(
+              dialog.options.system.wartoscUmiejetnosci,
+            );
+            const dialogHTML = event.currentTarget.lastChild;
+            const ulatwienia = Number(
+              dialogHTML.querySelector(".ulatwienia").value,
+            );
+            const utrudnienia = Number(
+              dialogHTML.querySelector(".utrudnienia").value,
+            );
+            const skillName = dialog.options.system.umiejtnosc;
+            const checkedSprzetTags = dialogHTML.querySelectorAll('input.sprzet-tag:checked');
+            const checkedAspektTags = dialogHTML.querySelectorAll('input.aspekt-tag:checked');
+            const bonusZTagow = checkedSprzetTags.length + checkedAspektTags.length;
+            const numberOfDice = baseNumberOfDice - utrudnienia + ulatwienia + bonusZTagow;
+            if (numberOfDice <= 0) {
+              //warning
+            } else {
+              const rzut = await new Roll(`${numberOfDice}d6`);
+              const dane = {
+                type: "skill",
+                nazwa: skillName.toUpperCase(),
+                aspekty: checkedAspektTags,
+                sprzet: checkedSprzetTags,
+                ulatwienia: ulatwienia,
+                utrudnienia: utrudnienia,
+              };
+              this.postRoll(rzut, dane);
+            }
+  }
+async groupTagsByDataNameArray(inputs) {
+  const grouped = {};
+
+  inputs.forEach(input => {
+    const dataName = input.dataset.name;
+    const tag = input.id;
+
+    if (!grouped[dataName]) {
+      grouped[dataName] = [];
+    }
+
+    grouped[dataName].push(tag);
+  });
+
+  return Object.entries(grouped).map(([name, tagi]) => ({ name, tagi }));
+}
   async postRoll(rzut, dane) {
     const wynik = await rzut.evaluate();
     const ranny = Object.values(this.actor.system?.rany).some(
@@ -100,9 +123,12 @@ export default class hellsingRoll {
         pech++;
       }
     });
+    const urzyteSprzety = await this.groupTagsByDataNameArray(dane.sprzet);
+    const urzyteAspekty = await this.groupTagsByDataNameArray(dane.aspekty);
+    console.log(urzyteAspekty, urzyteSprzety)
     const html = await agenci_Utility.renderTemplate(
       "systems/agencja-hellsing/templates/chat/roll.hbs",
-      { formula: wynik.formula, kostki: kostki, ranny: ranny },
+      { formula: wynik.formula, kostki: kostki, ranny: ranny, urzyteSprzety: urzyteSprzety, urzyteAspekty:urzyteAspekty },
     );
     let type = "";
     if (dane.type === "skill") {

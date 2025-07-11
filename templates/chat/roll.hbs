@@ -1,3 +1,23 @@
+
+{{log urzyteAspekty}}
+{{log urzyteSprzety}}
+{{#each urzyteSprzety as |item|}}
+  <div class="sprzety">
+    <strong>{{item.name}}</strong>
+    {{#each item.tagi as |tag|}}
+      <label>{{tag}}</label>
+    {{/each}}
+  </div>
+{{/each}}
+{{#each urzyteAspekty as |item|}}
+  <div class="sprzety">
+    <strong>{{item.name}}</strong>
+    {{#each item.tagi as |tag|}}
+      <label>{{tag}}</label>
+    {{/each}}
+  </div>
+{{/each}}
+
 <div class="formula-roll">{{formula}}</div>
 <div class="dice-tooltip">
   <div class="dice">

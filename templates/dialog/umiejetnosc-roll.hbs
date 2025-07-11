@@ -1,9 +1,14 @@
 <label>Rzucasz na Umiejętność
   <strong>{{umiejtnosc}}</strong>
   o wartości
-  <strong>{{wartoscUmiejetnosci}}</strong></label><br />
-
+  <strong>{{wartoscUmiejetnosci}}</strong></label>
+{{#bothNotEmpty aspekty sprzet}}
+<div class="wybieranie-tagow dwa">
+{{else}}
+<div class="wybieranie-tagow">
+{{/bothNotEmpty}}
 {{#if (notEmpty aspekty)}}
+<div class="aspekty-roll">
   <label>Aspekty:</label>
   <ul class="roll-tagi">
     {{#each aspekty}}
@@ -13,16 +18,17 @@
         {{#each this.tagi as |tag|}}
         <div class="single-tag">
           <label>{{tag}}</label>
-          <input type="checkbox" id="{{tag}}">
+          <input type="checkbox" class="aspekty-tag" id="{{tag}}" data-name="{{../name}}">
         </div>
-          
-        {{/each}}
+    {{/each}}
         </div>
     {{/each}}
   </ul>
+  </div>
 {{/if}}
-{{log sprzet}}
+
 {{#if (notEmpty sprzet)}}
+<div class="sprzety-roll">
   <label>Sprzęt:</label>
   <ul class="roll-tagi">
     {{#each sprzet}}
@@ -32,20 +38,20 @@
         {{#each this.tagi as |tag|}}
         <div class="single-tag">
           <label>{{tag}}</label>
-          <input type="checkbox" id="{{tag}}">
+          <input type="checkbox" class="sprzet-tag" id="{{tag}}" data-name="{{../name}}">
         </div>
           
         {{/each}}
         </div>
     {{/each}}
   </ul>
+  </div>
 {{/if}}
-
+</div>
 <label>
   Ułatwienia:
   <input class="ulatwienia" type="number" name="ulatwienia" value="0" min="0" />
-</label><br />
-
+</label>
 <label>
   Utrudnienia:
   <input

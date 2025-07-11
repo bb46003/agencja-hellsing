@@ -57,4 +57,27 @@ export function registerHandlebarsHelpers() {
       return false;
     }
   });
+  Handlebars.registerHelper("kosztAkcji", function (efekt){
+    const typKosztu = efekt.typkosztu;
+    const koszt = efekt.koszt;
+    let html = '<div class="koszt-label">'
+    if(koszt.P !== ""){
+      html += `<label class="koszt">P:${koszt.P}</label>`
+    }
+     if(koszt.S !== ""){
+      html += `<label class="koszt">S:${koszt.S}</label>`
+    }
+     if(koszt.M !== ""){
+      html += `<label class="koszt">M:${koszt.M}</label>`
+    }
+    html += '</div>'
+    return html
+  })
+  Handlebars.registerHelper("bothNotEmpty", function(a, b, options) {
+  if (Array.isArray(a) && a.length > 0 && Array.isArray(b) && b.length > 0) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+});
 }
